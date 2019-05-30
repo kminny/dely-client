@@ -67,6 +67,7 @@ const SettingsPresenter: React.SFC<IProps> = ({
     <Header backTo="/" title={"Account Settings"} />
     {loading || !data.me || !data.getPlaces ? (
       <Placeholder>
+        {console.log(loading, data, logUserOut)}
         <FontAwesome name="spinner fa-spin" />
       </Placeholder>
     ) : (

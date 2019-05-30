@@ -96,6 +96,7 @@ class LoginContainer extends React.Component<IProps, IState> {
     { data }: { data: any }
   ): void => {
     const { phoneNumber, countryCode } = this.state;
+    const slicedPhoneNumber = phoneNumber.substring(1);
     const { history } = this.props;
     const { requestPhoneSignIn } = data;
     if (requestPhoneSignIn.ok) {
@@ -105,7 +106,7 @@ class LoginContainer extends React.Component<IProps, IState> {
           history.push({
             pathname: "/verify-phone",
             state: {
-              phone: `${countryCode}${phoneNumber}`
+              phone: `${countryCode}${slicedPhoneNumber}`
             }
           }),
         4000
@@ -118,7 +119,7 @@ class LoginContainer extends React.Component<IProps, IState> {
   private handleSubmit = (mutationFn: MutationFn): void => {
     const { phoneNumber, countryCode } = this.state;
     const slicedPhoneNumber = phoneNumber.substring(1);
-    const isValid = /^\+[1-9]{1}[0-9]{9}$/.test(
+    const isValid = /^\+[1-9]{1}[0-9]{11}$/.test(
       `${countryCode}${slicedPhoneNumber}`
     );
     if (isValid) {

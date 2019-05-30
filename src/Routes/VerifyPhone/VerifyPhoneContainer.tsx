@@ -29,6 +29,7 @@ class VerifyPhoneContainer extends React.Component<any, IState> {
       phone,
       verificationKey: ""
     };
+    console.log(this.state, props);
   }
   render() {
     const { verificationKey, phone } = this.state;

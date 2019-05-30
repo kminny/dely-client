@@ -50,11 +50,11 @@ const UserElements: React.SFC<IUserElementsProps> = ({
         <Button
           width={"90%"}
           onClick={requestRide}
-          text={`Request ride for $${price}`}
+          text={`Request Dely (￦${price})`}
         />
       )}
       {status === "requesting" && (
-        <Button width={"90%"} onClick={null} text={`Finding driver...`} />
+        <Button width={"90%"} onClick={null} text={`Finding deliver...`} />
       )}
     </AbsContainer>
   </React.Fragment>

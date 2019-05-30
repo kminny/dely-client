@@ -16,6 +16,7 @@ class AddPhoneContainer extends React.Component<any, IState> {
       countryCode: "+82",
       phoneNumber: ""
     };
+    console.log(props, this.state);
   }
   render() {
     const { countryCode, phoneNumber } = this.state;

@@ -113,7 +113,7 @@ class CompleteProfileContainer extends React.Component<IProps, IState> {
 
   private getProfileImage = (url: string): void => {
     this.setState({
-      profilePhoto: url
+      profilePhoto: ""
     });
   };
 }

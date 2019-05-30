@@ -54,6 +54,8 @@ class HomeContainer extends React.Component<
       request: undefined,
       status: "idle"
     };
+    console.log(this.props);
+
     this.driverMarkers = [];
     this.mapRef = React.createRef();
   }
@@ -206,7 +208,7 @@ class HomeContainer extends React.Component<
     const node = ReactDOM.findDOMNode(this.mapRef.current);
     const mapConfig = {
       center: { lat, lng },
-      zoom: 16,
+      zoom: 15,
       mapTypeId: "roadmap",
       disableDefaultUI: true
     };
@@ -408,7 +410,7 @@ class HomeContainer extends React.Component<
     const rendererOptions: google.maps.DirectionsRendererOptions = {
       suppressMarkers: true,
       polylineOptions: {
-        strokeColor: "#000"
+        strokeColor: "#800000"
       }
     };
     const directionsService: google.maps.DirectionsService = new google.maps.DirectionsService();
@@ -433,20 +435,64 @@ class HomeContainer extends React.Component<
           duration: { text: duration }
         } = routes[0].legs[0];
         this.directionRenderer.setDirections(result);
-        const floatPrice = parseFloat(distance.replace(",", "")) * 3;
+        const price = this.setPrice();
         this.setState({
           status: "foundDirections",
           distance,
           duration,
-          price: Number(floatPrice.toFixed(2))
+          price
         });
       } else {
-        toast.error(
-          "Could not find a way to get there, you might have to swim"
-        );
+        toast.error("Unable Request Area");
       }
     });
     this.directionRenderer.setMap(this.map);
+  };
+
+  private getStraightDistance = () => {
+    const { lat, lng, toLat, toLng } = this.state;
+    const R = 6371;
+    const dLat = this.deg2Rad(toLat - lat);
+    const dLng = this.deg2Rad(toLng - lng);
+    const a =
+      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos(this.deg2Rad(lat)) *
+        Math.cos(this.deg2Rad(toLat)) *
+        Math.sin(dLng / 2) *
+        Math.sin(dLng / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    const d = R * c;
+    return d;
+  };
+
+  private deg2Rad = deg => {
+    return deg * (Math.PI / 180);
+  };
+
+  private setPrice = () => {
+    // set price by straight distance calculated by lat, lng
+
+    const { distance } = this.state;
+    const straightDistance: number = this.getStraightDistance();
+    const defaultPriceInsideSchool: number = 1300;
+    const defaultPriceOutsideSchool: number = 2000;
+
+    console.log(distance);
+    console.log(straightDistance);
+
+    // within 2.5km ( inside of the school )
+    // 0.28 won per meter
+    if (straightDistance < 2.5) {
+      return Number(
+        (defaultPriceInsideSchool + straightDistance * 1000 * 0.28).toFixed(0)
+      );
+    } else {
+      // over 2.5km ( outside of the school )
+      // 50 won per kilometer
+      return Number(
+        (defaultPriceOutsideSchool + straightDistance * 50).toFixed(0)
+      );
+    }
   };
 
   private requestRide = (): void => {
@@ -463,7 +509,7 @@ class HomeContainer extends React.Component<
       duration
     } = this.state;
     if (toLat === 0 || toLng === 0) {
-      toast.error("Cant order ride. Choose an address to go to");
+      toast.error("Can't order quest. Choose an starting address");
       return;
     }
     RequestRideMutation({
@@ -513,7 +559,7 @@ class HomeContainer extends React.Component<
           const ride = subscriptionData.data.rideUpdate;
 
           if (ride.status === ACCEPTED) {
-            toast.success("We have found a driver!");
+            toast.success("We have found a deliver!");
             this.redirectToRideScreen();
           }
         }
@@ -593,7 +639,7 @@ class HomeContainer extends React.Component<
           driverId: id
         }
       });
-      toast.success("Accepted the ride, redirecting you...");
+      toast.success("Accepted the quest, redirecting you...");
       this.redirectToRideScreen();
     }
   };
@@ -622,6 +668,7 @@ export default compose(
       pollInterval: 10000
     },
     skip: props => {
+      console.log(props);
       return props.MeQuery.me.user.isDriving;
     }
   }),

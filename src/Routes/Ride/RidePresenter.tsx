@@ -47,13 +47,13 @@ const RidePresenter: React.SFC<IProps> = ({
 }) => (
   <Wrapper>
     <Helmet>
-      <title>Ride | dely</title>
+      <title>Quest | dely</title>
     </Helmet>
-    <Header>Ride</Header>
+    <Header>Quest</Header>
     {!loading && ride && (
       <Container>
         <DataRow>
-          <ItemValue>{isDriver ? "Your passenger" : "Your driver"}</ItemValue>
+          <ItemValue>{isDriver ? "Your customer" : "Your deliver"}</ItemValue>
         </DataRow>
         {isDriver ? (
           <UserCard
@@ -76,7 +76,7 @@ const RidePresenter: React.SFC<IProps> = ({
         </DataRow>
         <DataRow>
           <ItemTitle>Price:</ItemTitle>
-          <ItemValue>${ride.price}</ItemValue>
+          <ItemValue>￦{ride.price}</ItemValue>
         </DataRow>
         <DataRow>
           <ItemTitle>Status:</ItemTitle>
@@ -87,13 +87,13 @@ const RidePresenter: React.SFC<IProps> = ({
         {ride.status === ACCEPTED && (
           <Button
             onClick={redirectToChat}
-            text={`Send message to ${isDriver ? "passenger" : "driver"}`}
+            text={`Send message to ${isDriver ? "customer" : "deliver"}`}
           />
         )}
         {isDriver && (
           <React.Fragment>
             {ride.status === ONROUTE && (
-              <Button text={"Finish ride"} onClick={finishRide} />
+              <Button text={"Finish delying"} onClick={finishRide} />
             )}
             <Button onClick={pickUp} bgColor={"#1abc9c"} text={"Picked up"} />
             <Button onClick={cancelRide} bgColor={"#e74c3c"} text={"Cancel"} />

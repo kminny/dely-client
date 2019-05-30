@@ -45,7 +45,7 @@ const DriverElements: React.SFC<IDriverElementsProps> = ({
       </DataRow>
       <DataRow>
         <ItemTitle>Price:</ItemTitle>
-        <ItemValue>${request.price}</ItemValue>
+        <ItemValue>￦{request.price}</ItemValue>
       </DataRow>
       <Button onClick={acceptRide} text={"Accept Request"} />
     </Container>

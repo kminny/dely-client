@@ -71,8 +71,8 @@ class HomePresenter extends React.Component<IHomePresenterProps> {
       isMenuOpen,
       closeMenu,
       redirectToVerify,
-      me,
       loading,
+      me,
       mapRef,
       children,
       showMarker

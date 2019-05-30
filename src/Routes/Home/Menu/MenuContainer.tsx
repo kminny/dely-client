@@ -45,9 +45,9 @@ class MenuContainer extends React.Component<any, any> {
         query.me.user.isDriving = isDriving;
         cache.writeQuery({ query: ME, data: query });
         if (isDriving) {
-          toast.success("You're now driving! Make good money");
+          toast.success("You're now Delying!");
         } else {
-          toast.success("You are not driving anymore, sit back and enjoy");
+          toast.success("You are not Delying anymore");
         }
       }
     }

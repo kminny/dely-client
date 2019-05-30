@@ -4,6 +4,10 @@ import SettingsPresenter from "./SettingsPresenter";
 import { ACCOUNT_QUERY, LOG_OUT } from "./SettingsQuery";
 
 class SettingsContainer extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
   render() {
     return (
       <Mutation mutation={LOG_OUT}>

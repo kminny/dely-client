@@ -71,6 +71,11 @@ class RideContainer extends React.Component<IProps> {
       location.reload();
     }
 
+    if (status === FINISHED) {
+      history.push("/");
+      location.reload();
+    }
+
     return Object.assign({}, previousData, {
       getRide: {
         ...previousData.getRide,
