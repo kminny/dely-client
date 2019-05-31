@@ -29,21 +29,6 @@ const Icon = styled.button`
   }
 `;
 
-const PhoneError = styled.div`
-  background-color: #e74c3c;
-  width: 100%;
-  color: white;
-  padding: 30px 15px;
-  position: absolute;
-  cursor: pointer;
-  bottom: 0;
-  z-index: 10;
-`;
-
-const FakeLink = styled.span`
-  text-decoration: underline;
-`;
-
 const Map = styled.div`
   position: absolute;
   width: 100vw;
@@ -70,9 +55,6 @@ class HomePresenter extends React.Component<IHomePresenterProps> {
       openMenu,
       isMenuOpen,
       closeMenu,
-      redirectToVerify,
-      loading,
-      me,
       mapRef,
       children,
       showMarker
@@ -104,11 +86,7 @@ class HomePresenter extends React.Component<IHomePresenterProps> {
             <FontAwesome name={"bars"} />
           </Icon>
         </Sidebar>
-        {!loading && !me.user.verifiedPhoneNumber && (
-          <PhoneError onClick={redirectToVerify}>
-            You need to verify your phone <FakeLink>tap here to do it</FakeLink>
-          </PhoneError>
-        )}
+
         {showMarker && <Marker />}
         <Map innerRef={mapRef} />
         {children}

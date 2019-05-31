@@ -7,6 +7,9 @@ import MenuPresenter from "./MenuPresenter";
 import { TOGGLE_DRIVING } from "./MenuQueries";
 
 class MenuContainer extends React.Component<any, any> {
+  constructor(props) {
+    super(props);
+  }
   render() {
     return (
       <Query query={ME}>
@@ -15,7 +18,7 @@ class MenuContainer extends React.Component<any, any> {
             update={this.postToggleDriving}
             mutation={TOGGLE_DRIVING}
             variables={{ isDriving: data.me ? !data.me.user.isDriving : false }}
-            // refetchQueries={[{ query: ME }]}
+            refetchQueries={[{ query: ME }]}
           >
             {toggleDriving => (
               <MenuPresenter

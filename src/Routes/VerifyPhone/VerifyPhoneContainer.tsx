@@ -72,6 +72,7 @@ class VerifyPhoneContainer extends React.Component<any, IState> {
     const { completePhoneSignIn, verifyPhone } = data;
     const { history } = this.props;
     const { phone } = this.state;
+    console.log(this.props, this.state, data);
     if (completePhoneSignIn) {
       if (completePhoneSignIn.error && !completePhoneSignIn.ok) {
         toast.error(completePhoneSignIn.error);

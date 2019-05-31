@@ -53,6 +53,7 @@ class AddPhoneContainer extends React.Component<any, IState> {
     const { countryCode, phoneNumber } = this.state;
     const { addPhone } = data;
     const { history } = this.props;
+
     if (addPhone.ok) {
       toast.success("SMS Sent, redirecting you...");
       setTimeout(
