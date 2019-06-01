@@ -9,6 +9,8 @@ import { TOGGLE_DRIVING } from "./MenuQueries";
 class MenuContainer extends React.Component<any, any> {
   constructor(props) {
     super(props);
+
+    this.postToggleDriving = this.postToggleDriving.bind(this);
   }
   render() {
     return (

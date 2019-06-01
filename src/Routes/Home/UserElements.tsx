@@ -10,7 +10,7 @@ const UserElements: React.SFC<IUserElementsProps> = ({
   handleInputChange,
   submitAddress,
   toggleMapChoosing,
-  chooseMapAddres,
+  chooseMapAddress,
   requestRide,
   price,
   status
@@ -34,7 +34,7 @@ const UserElements: React.SFC<IUserElementsProps> = ({
       {status === "choosingFromMap" && (
         <Button
           width={"90%"}
-          onClick={chooseMapAddres}
+          onClick={chooseMapAddress}
           text={"Pick this place"}
         />
       )}
@@ -65,7 +65,7 @@ UserElements.propTypes = {
   handleInputChange: PropTypes.func.isRequired,
   submitAddress: PropTypes.func.isRequired,
   toggleMapChoosing: PropTypes.func.isRequired,
-  chooseMapAddres: PropTypes.func.isRequired,
+  chooseMapAddress: PropTypes.func.isRequired,
   requestRide: PropTypes.func.isRequired,
   price: PropTypes.number,
   status: PropTypes.string.isRequired

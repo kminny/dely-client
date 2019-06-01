@@ -55,7 +55,7 @@ export interface IUserElementsProps {
   ) => void;
   submitAddress: () => Promise<void>;
   toggleMapChoosing: () => void;
-  chooseMapAddres: () => void;
+  chooseMapAddress: () => void;
   requestRide: () => void;
   price: number | undefined;
   status: status;

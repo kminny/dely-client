@@ -57,7 +57,8 @@ interface IProps {
 
 const SettingsPresenter: React.SFC<IProps> = ({
   loading,
-  data,
+  data: { me: { user = null } = {} } = {} || "",
+  data: { getPlaces: { places = null } = {} } = {} || "",
   logUserOut
 }) => (
   <Wrapper className={"shouldScroll"}>
@@ -65,28 +66,28 @@ const SettingsPresenter: React.SFC<IProps> = ({
       <title>Account Settings | dely</title>
     </Helmet>
     <Header backTo="/" title={"Account Settings"} />
-    {loading || !data.me || !data.getPlaces ? (
+    {loading || !user || !places ? (
       <Placeholder>
-        {console.log(loading, data, logUserOut)}
+        {console.log(loading, user, logUserOut)}
         <FontAwesome name="spinner fa-spin" />
       </Placeholder>
     ) : (
       <Container>
-        {console.log(loading, data)}
+        {console.log(loading, user)}
         <Section first={true}>
           <GridLink to={"/edit-account"}>
-            <Image src={data.me.user.profilePhoto} />
+            <Image src={user.profilePhoto} />
             <Keys>
-              <Key>{data.me.user.fullName}</Key>
-              <Key>{data.me.user.phoneNumber}</Key>
-              <Key>{data.me.user.email}</Key>
+              <Key>{user.fullName}</Key>
+              <Key>{user.phoneNumber}</Key>
+              <Key>{user.email}</Key>
             </Keys>
           </GridLink>
         </Section>
 
         <Link to={"/places"}>
           <Section title="Favorites">
-            {data.getPlaces.places.length === 0 || !data.getPlaces.places ? (
+            {places.length === 0 || !places ? (
               <NoPlaces>
                 You have no favorite places yet.{" "}
                 <FakeLink to={"/add-place"}>Add one</FakeLink>
@@ -94,10 +95,10 @@ const SettingsPresenter: React.SFC<IProps> = ({
             ) : (
               <React.Fragment>
                 <Place
-                  name={data.getPlaces.places[0].name}
-                  fav={data.getPlaces.places[0].fav}
-                  address={data.getPlaces.places[0].address}
-                  id={data.getPlaces.places[0].id}
+                  name={places[0].name}
+                  fav={places[0].fav}
+                  address={places[0].address}
+                  id={places[0].id}
                 />
                 <FakeLink>More Saved Places</FakeLink>
               </React.Fragment>

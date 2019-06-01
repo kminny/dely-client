@@ -58,6 +58,28 @@ class HomeContainer extends React.Component<
 
     this.driverMarkers = [];
     this.mapRef = React.createRef();
+
+    this.loadMap = this.loadMap.bind(this);
+    this.acceptRide = this.acceptRide.bind(this);
+    this.chooseMapAddress = this.chooseMapAddress.bind(this);
+    this.closeMenu = this.closeMenu.bind(this);
+    this.createPath = this.createPath.bind(this);
+    this.createToMarket = this.createToMarket.bind(this);
+    this.drawDrivers = this.drawDrivers.bind(this);
+    this.handleCenterChange = this.handleCenterChange.bind(this);
+    this.handleGeoError = this.handleGeoError.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleRotation = this.handleRotation.bind(this);
+    this.hidrateAddress = this.hidrateAddress.bind(this);
+    this.openMenu = this.openMenu.bind(this);
+    this.postRequestRide = this.postRequestRide.bind(this);
+    this.redirectToRideScreen = this.redirectToRideScreen.bind(this);
+    this.redirectToVerify = this.redirectToVerify.bind(this);
+    this.requestRide = this.requestRide.bind(this);
+    this.setPrice = this.setPrice.bind(this);
+    this.submitAddress = this.submitAddress.bind(this);
+    this.toggleMapChoosing = this.toggleMapChoosing.bind(this);
+    this.updatePosition = this.updatePosition.bind(this);
   }
 
   componentDidMount() {
@@ -140,7 +162,7 @@ class HomeContainer extends React.Component<
             handleInputChange={this.handleInputChange}
             submitAddress={this.submitAddress}
             toggleMapChoosing={this.toggleMapChoosing}
-            chooseMapAddres={this.chooseMapAddres}
+            chooseMapAddress={this.chooseMapAddress}
             requestRide={this.requestRide}
             price={price}
             status={status}
@@ -250,13 +272,17 @@ class HomeContainer extends React.Component<
       }
     }
     if (isDriving) {
-      const {
-        getRideRequest: { ok, error, ride }
-      } = GetRideRequestQuery;
-      if (!ok && error) {
-        toast.error(error);
-      } else if (ok && ride) {
-        this.handleRideRequest(ride);
+      if (GetRideRequestQuery.getRideRequest) {
+        const {
+          getRideRequest: { ok, error, ride }
+        } = GetRideRequestQuery;
+        if (!ok && error) {
+          toast.error(error);
+        } else if (ok && ride) {
+          this.handleRideRequest(ride);
+        }
+      } else {
+        return;
       }
       const subscribeOptions: SubscribeToMoreOptions = {
         document: RIDE_REQUEST_SUBSCRIPTION,
@@ -371,7 +397,7 @@ class HomeContainer extends React.Component<
     }
   };
 
-  private chooseMapAddres = (): void => {
+  private chooseMapAddress = (): void => {
     const { toLat, toLng } = this.state;
     if (toLat !== 0 && toLng !== 0) {
       this.setState(
@@ -668,7 +694,6 @@ export default compose(
       pollInterval: 10000
     },
     skip: props => {
-      console.log(props);
       return props.MeQuery.me.user.isDriving;
     }
   }),
