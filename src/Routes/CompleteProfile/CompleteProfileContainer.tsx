@@ -43,7 +43,7 @@ class CompleteProfileContainer extends React.Component<IProps, IState> {
       lastName: "",
       password: "",
       age: "",
-      profilePhoto: "/src/images/person.png"
+      profilePhoto: "/home/kmseo/img/person.png"
     };
   }
   render() {
@@ -113,7 +113,7 @@ class CompleteProfileContainer extends React.Component<IProps, IState> {
 
   private getProfileImage = (url: string): void => {
     this.setState({
-      profilePhoto: url
+      profilePhoto: "/home/kmseo/img/person.png"
     });
   };
 }

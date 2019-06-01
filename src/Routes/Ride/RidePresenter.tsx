@@ -57,13 +57,13 @@ const RidePresenter: React.SFC<IProps> = ({
         </DataRow>
         {isDriver ? (
           <UserCard
-            name={ride.driver.fullName}
-            photo={ride.driver.profilePhoto}
+            name={ride.passenger.fullName}
+            photo="/home/kmseo/img/person.png"
           />
         ) : (
           <UserCard
-            name={ride.passenger.fullName}
-            photo={ride.passenger.profilePhoto}
+            name={ride.driver.fullName}
+            photo={ride.driver.profilePhoto}
           />
         )}
         <DataRow>
@@ -84,18 +84,24 @@ const RidePresenter: React.SFC<IProps> = ({
           {ride.status === ONROUTE && <ItemValue>On Route</ItemValue>}
           {ride.status === CANCELED && <ItemValue>Canceled</ItemValue>}
         </DataRow>
-        {ride.status === ACCEPTED && (
-          <Button
-            onClick={redirectToChat}
-            text={`Send message to ${isDriver ? "customer" : "deliver"}`}
-          />
-        )}
+
+        <Button
+          onClick={redirectToChat}
+          text={`💬 Send message to ${isDriver ? "customer" : "deliver"}`}
+        />
+
         {isDriver && (
           <React.Fragment>
             {ride.status === ONROUTE && (
-              <Button text={"Finish delying"} onClick={finishRide} />
+              <Button
+                text={"Finish delying"}
+                bgColor={"#1abc9c"}
+                onClick={finishRide}
+              />
             )}
-            <Button onClick={pickUp} bgColor={"#1abc9c"} text={"Picked up"} />
+            {ride.status !== ONROUTE && (
+              <Button onClick={pickUp} bgColor={"#1abc9c"} text={"Picked up"} />
+            )}
             <Button onClick={cancelRide} bgColor={"#e74c3c"} text={"Cancel"} />
           </React.Fragment>
         )}

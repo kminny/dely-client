@@ -68,7 +68,7 @@ const SettingsPresenter: React.SFC<IProps> = ({
     <Header backTo="/" title={"Account Settings"} />
     {loading || !user || !places ? (
       <Placeholder>
-        {console.log(loading, user, logUserOut)}
+        {console.log(loading, user, places)}
         <FontAwesome name="spinner fa-spin" />
       </Placeholder>
     ) : (
@@ -81,6 +81,7 @@ const SettingsPresenter: React.SFC<IProps> = ({
               <Key>{user.fullName}</Key>
               <Key>{user.phoneNumber}</Key>
               <Key>{user.email}</Key>
+              <Key>Money Earned {user.balance}</Key>
             </Keys>
           </GridLink>
         </Section>

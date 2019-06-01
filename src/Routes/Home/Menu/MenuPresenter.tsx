@@ -85,7 +85,11 @@ interface IProps {
   toggleDriving: MutationFn;
 }
 
-const MenuPresenter: React.SFC<IProps> = ({ loading, data, toggleDriving }) => (
+const MenuPresenter: React.SFC<IProps> = ({
+  loading,
+  data: { me: { user = null } = {} } = {} || "",
+  toggleDriving
+}) => (
   <Container>
     <Header>
       {loading ? (
@@ -95,19 +99,19 @@ const MenuPresenter: React.SFC<IProps> = ({ loading, data, toggleDriving }) => (
       ) : (
         <Grid>
           <Link to={"/edit-account"}>
-            <Image src={data.me.user.profilePhoto} />
+            <Image src={user.profilePhoto} />
           </Link>
           <Text>
-            <Name>{data.me.user.fullName}</Name>
+            <Name>{user.fullName}</Name>
             <Rating>4.5</Rating>
           </Text>
         </Grid>
       )}
     </Header>
-    {!data.me.user.isDriving && <SLink to="/trips">Your Deliveries</SLink>}
+    <SLink to="/trips">Your Deliveries</SLink>
     <SLink to="/settings">Settings</SLink>
     <ToggleDriving onClick={toggleDriving as any}>
-      {data.me.user.isDriving ? "Stop Delying" : "Start Delying"}
+      {user && user.isDriving ? "Stop Delying" : "Start Delying"}
     </ToggleDriving>
   </Container>
 );

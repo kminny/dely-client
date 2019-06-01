@@ -100,12 +100,7 @@ class HomeContainer extends React.Component<
       GetRideRequestQuery: { getRideRequest: { ride = null } = {} } = {},
       GetDriversQuery: { getDrivers: { drivers = null } = {} } = {}
     } = nextProps;
-    const {
-      MeQuery: {
-        me: { user }
-      },
-      history
-    } = this.props;
+    const { MeQuery: { me: { user = null } = {} } = {}, history } = this.props;
     if (drivers) {
       if (this.map) {
         this.drawDrivers(drivers);
@@ -694,7 +689,9 @@ export default compose(
       pollInterval: 10000
     },
     skip: props => {
-      return props.MeQuery.me.user.isDriving;
+      if (props.MeQuery && props.MeQuery.me && props.MeQuery.me.user) {
+        return props.MeQuery.me.user.isDriving;
+      }
     }
   }),
   graphql(GET_RIDE_REQUEST, {
@@ -703,7 +700,11 @@ export default compose(
       pollInterval: 10000
     },
     skip: props => {
-      return !props.MeQuery.me.user.isDriving;
+      if (props.MeQuery && props.MeQuery.me && props.MeQuery.me.user) {
+        const value = props.MeQuery.me.user.isDriving;
+        return !value;
+      }
+      return false;
     }
   }),
   graphql(REQUEST_RIDE, {

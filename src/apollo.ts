@@ -34,6 +34,7 @@ const httpLink = new HttpLink({
 });
 
 const wsLink = new WebSocketLink({
+  // "ws://localhost:4000/subscriptions",
   uri: "ws://52.231.30.19:4000/subscriptions",
   options: {
     reconnect: true,
