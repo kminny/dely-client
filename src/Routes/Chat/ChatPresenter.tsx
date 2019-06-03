@@ -41,6 +41,7 @@ const ChatPresenter: React.SFC<IProps> = ({
     <Header title={"Chat"} goBack={true} backTo={"/ride"} />
     <Container>
       <Messages>
+        {loading && window.location.reload}
         {!loading &&
           messages
             .map(aMessage => (
