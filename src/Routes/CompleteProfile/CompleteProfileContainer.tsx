@@ -13,6 +13,7 @@ interface IState {
   password: string;
   age: string;
   profilePhoto: string;
+  major: string;
 }
 
 interface IProps {
@@ -43,7 +44,8 @@ class CompleteProfileContainer extends React.Component<IProps, IState> {
       lastName: "",
       password: "",
       age: "",
-      profilePhoto: "/home/kmseo/img/person.png"
+      profilePhoto: "/home/kmseo/img/person.png",
+      major: ""
     };
   }
   render() {
@@ -54,7 +56,8 @@ class CompleteProfileContainer extends React.Component<IProps, IState> {
       password,
       age,
       phoneNumber,
-      profilePhoto
+      profilePhoto,
+      major
     } = this.state;
     return (
       <Mutation
@@ -67,7 +70,8 @@ class CompleteProfileContainer extends React.Component<IProps, IState> {
           lastName,
           password,
           age,
-          profilePhoto
+          profilePhoto,
+          major
         }}
       >
         {(emailSignUp, { loading }) => (
@@ -81,6 +85,7 @@ class CompleteProfileContainer extends React.Component<IProps, IState> {
             loading={loading}
             onSubmit={emailSignUp}
             getProfileImage={this.getProfileImage}
+            major={major}
           />
         )}
       </Mutation>

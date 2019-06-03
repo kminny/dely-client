@@ -32,6 +32,7 @@ class RideContainer extends React.Component<IProps> {
         state: { rideId }
       }
     } = this.props;
+
     return (
       <Query query={GET_RIDE} variables={{ skip: false, rideId }}>
         {({ data, loading, subscribeToMore }) => {

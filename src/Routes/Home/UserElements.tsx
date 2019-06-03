@@ -13,7 +13,8 @@ const UserElements: React.SFC<IUserElementsProps> = ({
   chooseMapAddress,
   requestRide,
   price,
-  status
+  status,
+  cancelRide
 }) => (
   <React.Fragment>
     <AbsContainer top={true}>
@@ -54,7 +55,15 @@ const UserElements: React.SFC<IUserElementsProps> = ({
         />
       )}
       {status === "requesting" && (
-        <Button width={"90%"} onClick={null} text={`Finding deliver...`} />
+        <React.Fragment>
+          <Button width={"90%"} onClick={null} text={`Finding deliver...`} />
+          <Button
+            width={"90%"}
+            onClick={cancelRide}
+            bgColor={"#e74c3c"}
+            text={"Cancel"}
+          />
+        </React.Fragment>
       )}
     </AbsContainer>
   </React.Fragment>
@@ -68,7 +77,8 @@ UserElements.propTypes = {
   chooseMapAddress: PropTypes.func.isRequired,
   requestRide: PropTypes.func.isRequired,
   price: PropTypes.number,
-  status: PropTypes.string.isRequired
+  status: PropTypes.string.isRequired,
+  cancelRide: PropTypes.func
 };
 
 export default UserElements;

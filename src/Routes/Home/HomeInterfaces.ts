@@ -59,6 +59,7 @@ export interface IUserElementsProps {
   requestRide: () => void;
   price: number | undefined;
   status: status;
+  cancelRide: () => void;
 }
 
 export interface IDriverElementsProps {

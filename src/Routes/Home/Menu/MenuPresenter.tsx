@@ -77,6 +77,7 @@ const ToggleDriving = styled.button`
   font-size: 18px;
   border: 0;
   padding: 15px 0px;
+  cursor: pointer;
 `;
 
 interface IProps {
@@ -91,6 +92,7 @@ const MenuPresenter: React.SFC<IProps> = ({
   toggleDriving
 }) => (
   <Container>
+    {console.log(user)}
     <Header>
       {loading ? (
         <Placeholder>
@@ -103,7 +105,7 @@ const MenuPresenter: React.SFC<IProps> = ({
           </Link>
           <Text>
             <Name>{user.fullName}</Name>
-            <Rating>4.5</Rating>
+            <Rating>Money earned: ￦ {user.balance}</Rating>
           </Text>
         </Grid>
       )}

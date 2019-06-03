@@ -79,11 +79,12 @@ export const GET_RIDE_REQUEST = gql`
           fullName
           email
           phoneNumber
+          major
         }
         price
         pickUpLocation
         dropOffLocation
-        price
+        status
       }
       error
     }

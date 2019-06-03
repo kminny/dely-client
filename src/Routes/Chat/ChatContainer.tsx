@@ -19,6 +19,7 @@ interface IProps {
 
 interface IState {
   message: "";
+  reloaded: boolean;
 }
 
 class ChatContainer extends React.Component<IProps, IState> {
@@ -28,15 +29,18 @@ class ChatContainer extends React.Component<IProps, IState> {
       props.history.push("/");
     }
     this.state = {
-      message: ""
+      message: "",
+      reloaded: false
     };
   }
+
   render() {
     const {
       MeQuery: { me: { user: { id = 0 } = {} } = {} } = {},
       location: { state: { rideId = 0 } = {} }
     } = this.props;
     const { message } = this.state;
+
     return (
       <Query
         query={GET_CHAT}
@@ -68,14 +72,10 @@ class ChatContainer extends React.Component<IProps, IState> {
     if (!subscriptionData.data) {
       return previousData;
     }
-    const {
-      data: { newMessage }
-    } = subscriptionData;
+    const { data: { newMessage = " " } = " " } = subscriptionData;
 
     const {
-      getChat: {
-        chat: { messages }
-      }
+      getChat: { chat: { messages = " " } = " " }
     } = previousData;
 
     const lastMessage = messages[messages.length - 1];

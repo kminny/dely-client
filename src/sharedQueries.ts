@@ -34,6 +34,8 @@ export const ME = gql`
         verifiedPhoneNumber
         isDriving
         currentRideId
+        balance
+        major
       }
       error
     }
@@ -82,6 +84,7 @@ export const GET_RIDE = gql`
           phoneNumber
           lastLat
           lastLng
+          major
         }
         driver {
           profilePhoto
@@ -90,6 +93,7 @@ export const GET_RIDE = gql`
           phoneNumber
           lastLat
           lastLng
+          major
         }
         price
         pickUpLocation

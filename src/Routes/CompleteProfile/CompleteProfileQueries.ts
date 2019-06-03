@@ -9,6 +9,7 @@ export const EMAIL_SIGN_UP = gql`
     $password: String!
     $age: Int!
     $profilePhoto: String!
+    $major: String!
   ) {
     emailSignUp(
       phoneNumber: $phoneNumber
@@ -18,6 +19,7 @@ export const EMAIL_SIGN_UP = gql`
       password: $password
       age: $age
       profilePhoto: $profilePhoto
+      major: $major
     ) {
       ok
       token

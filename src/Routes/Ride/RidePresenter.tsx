@@ -36,6 +36,7 @@ interface IProps {
 const ACCEPTED = "ACCEPTED";
 const ONROUTE = "ONROUTE";
 const CANCELED = "CANCELED";
+const FINISHED = "FINISHED";
 
 const RidePresenter: React.SFC<IProps> = ({
   loading,
@@ -52,17 +53,20 @@ const RidePresenter: React.SFC<IProps> = ({
     <Header>Quest</Header>
     {!loading && ride && (
       <Container>
+        {console.log(ride)}
         <DataRow>
           <ItemValue>{isDriver ? "Your customer" : "Your deliver"}</ItemValue>
         </DataRow>
         {isDriver ? (
           <UserCard
             name={ride.passenger.fullName}
+            major={ride.passenger.major}
             photo="/home/kmseo/img/person.png"
           />
         ) : (
           <UserCard
             name={ride.driver.fullName}
+            major={ride.driver.major}
             photo={ride.driver.profilePhoto}
           />
         )}
@@ -83,6 +87,7 @@ const RidePresenter: React.SFC<IProps> = ({
           {ride.status === ACCEPTED && <ItemValue>Accepted</ItemValue>}
           {ride.status === ONROUTE && <ItemValue>On Route</ItemValue>}
           {ride.status === CANCELED && <ItemValue>Canceled</ItemValue>}
+          {ride.status === FINISHED && <ItemValue>FINISHED</ItemValue>}
         </DataRow>
 
         <Button
@@ -102,9 +107,10 @@ const RidePresenter: React.SFC<IProps> = ({
             {ride.status !== ONROUTE && (
               <Button onClick={pickUp} bgColor={"#1abc9c"} text={"Picked up"} />
             )}
-            <Button onClick={cancelRide} bgColor={"#e74c3c"} text={"Cancel"} />
           </React.Fragment>
         )}
+
+        <Button onClick={cancelRide} bgColor={"#e74c3c"} text={"Cancel"} />
       </Container>
     )}
   </Wrapper>

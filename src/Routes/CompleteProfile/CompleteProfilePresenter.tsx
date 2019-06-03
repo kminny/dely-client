@@ -18,6 +18,7 @@ interface IProps {
   handleInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onSubmit: MutationFn;
   getProfileImage: (url: string) => void;
+  major: string;
 }
 
 const CompleteProfilePresenter: React.SFC<IProps> = ({
@@ -29,7 +30,8 @@ const CompleteProfilePresenter: React.SFC<IProps> = ({
   handleInputChange,
   onSubmit,
   loading,
-  getProfileImage
+  getProfileImage,
+  major
 }) => (
   <Wrapper className={"shouldScroll"}>
     <Helmet>
@@ -52,6 +54,14 @@ const CompleteProfilePresenter: React.SFC<IProps> = ({
           type={"text"}
           required={true}
           displayName={"Last Name"}
+          onChange={handleInputChange}
+        />
+        <Input
+          name={"major"}
+          value={major}
+          type={"text"}
+          required={true}
+          displayName={"Major"}
           onChange={handleInputChange}
         />
         <Input

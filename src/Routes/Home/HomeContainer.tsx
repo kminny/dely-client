@@ -58,28 +58,6 @@ class HomeContainer extends React.Component<
 
     this.driverMarkers = [];
     this.mapRef = React.createRef();
-
-    this.loadMap = this.loadMap.bind(this);
-    this.acceptRide = this.acceptRide.bind(this);
-    this.chooseMapAddress = this.chooseMapAddress.bind(this);
-    this.closeMenu = this.closeMenu.bind(this);
-    this.createPath = this.createPath.bind(this);
-    this.createToMarket = this.createToMarket.bind(this);
-    this.drawDrivers = this.drawDrivers.bind(this);
-    this.handleCenterChange = this.handleCenterChange.bind(this);
-    this.handleGeoError = this.handleGeoError.bind(this);
-    this.handleInputChange = this.handleInputChange.bind(this);
-    this.handleRotation = this.handleRotation.bind(this);
-    this.hidrateAddress = this.hidrateAddress.bind(this);
-    this.openMenu = this.openMenu.bind(this);
-    this.postRequestRide = this.postRequestRide.bind(this);
-    this.redirectToRideScreen = this.redirectToRideScreen.bind(this);
-    this.redirectToVerify = this.redirectToVerify.bind(this);
-    this.requestRide = this.requestRide.bind(this);
-    this.setPrice = this.setPrice.bind(this);
-    this.submitAddress = this.submitAddress.bind(this);
-    this.toggleMapChoosing = this.toggleMapChoosing.bind(this);
-    this.updatePosition = this.updatePosition.bind(this);
   }
 
   componentDidMount() {
@@ -161,6 +139,7 @@ class HomeContainer extends React.Component<
             requestRide={this.requestRide}
             price={price}
             status={status}
+            cancelRide={this.cancelRide}
           />
         )}
       </HomePresenter>
@@ -214,12 +193,9 @@ class HomeContainer extends React.Component<
       google,
       GetDriversQuery,
       GetRideRequestQuery,
-      MeQuery: {
-        me: {
-          user: { isDriving }
-        }
-      }
+      MeQuery: { me: { user = {} } = {} }
     } = this.props;
+
     const { lat, lng } = this.state;
     const maps = google.maps;
     const node = ReactDOM.findDOMNode(this.mapRef.current);
@@ -252,7 +228,7 @@ class HomeContainer extends React.Component<
       this.handleGeoError,
       locationOptions
     );
-    if (!isDriving) {
+    if (user && !user.isDriving) {
       const { getDrivers: { drivers = null } = {} } = GetDriversQuery;
       if (drivers) {
         this.drawDrivers(drivers);
@@ -266,7 +242,7 @@ class HomeContainer extends React.Component<
         GetDriversQuery.subscribeToMore(subscribeOptions);
       }
     }
-    if (isDriving) {
+    if (user && user.isDriving) {
       if (GetRideRequestQuery.getRideRequest) {
         const {
           getRideRequest: { ok, error, ride }
@@ -556,6 +532,7 @@ class HomeContainer extends React.Component<
     cache,
     { data }: { data: any }
   ) => {
+    console.log("From postRequestRide", data);
     const { requestRide } = data;
     const { GetRideQuery } = this.props;
     if (!requestRide.ok && requestRide.error) {
@@ -652,7 +629,7 @@ class HomeContainer extends React.Component<
         user: { id }
       }
     } = MeQuery;
-    if (request) {
+    if (request.status === "REQUESTING") {
       UpdateRideMutation({
         variables: {
           status: ACCEPTED,
@@ -662,6 +639,9 @@ class HomeContainer extends React.Component<
       });
       toast.success("Accepted the quest, redirecting you...");
       this.redirectToRideScreen();
+    } else {
+      toast.error("Already accepted by other user...");
+      window.location.reload();
     }
   };
   private redirectToRideScreen = () => {
@@ -675,6 +655,18 @@ class HomeContainer extends React.Component<
         }
       });
     }, 1500);
+  };
+  private cancelRide = () => {
+    console.log(this.props);
+    console.log(this.state);
+    const { request } = this.state;
+    const { UpdateRideMutation } = this.props;
+    UpdateRideMutation({
+      variables: {
+        rideId: request.id,
+        status: "CANCELED"
+      }
+    });
   };
 }
 

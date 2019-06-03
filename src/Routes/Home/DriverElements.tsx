@@ -29,11 +29,13 @@ const DriverElements: React.SFC<IDriverElementsProps> = ({
   request,
   acceptRide
 }) =>
-  hasRequest && request ? (
+  hasRequest && request && request.status === "REQUESTING" ? (
     <Container>
+      {console.log(request)}
       <UserCard
         photo={request.passenger.profilePhoto}
         name={request.passenger.fullName}
+        major={request.passenger.major}
       />
       <DataRow>
         <ItemTitle>From:</ItemTitle>
@@ -47,7 +49,12 @@ const DriverElements: React.SFC<IDriverElementsProps> = ({
         <ItemTitle>Price:</ItemTitle>
         <ItemValue>￦{request.price}</ItemValue>
       </DataRow>
-      <Button onClick={acceptRide} text={"Accept Request"} />
+      {request.status === "REQUESTING" && (
+        <Button onClick={acceptRide} text={"Accept Request"} />
+      )}
+      {request.status !== "REQUESTING" && (
+        <Button onClick={acceptRide} text={"Cancel"} />
+      )}
     </Container>
   ) : null;
 

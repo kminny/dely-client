@@ -81,7 +81,6 @@ const SettingsPresenter: React.SFC<IProps> = ({
               <Key>{user.fullName}</Key>
               <Key>{user.phoneNumber}</Key>
               <Key>{user.email}</Key>
-              <Key>Money Earned {user.balance}</Key>
             </Keys>
           </GridLink>
         </Section>
