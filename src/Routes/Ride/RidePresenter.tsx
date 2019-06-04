@@ -41,6 +41,7 @@ const FINISHED = "FINISHED";
 const RidePresenter: React.SFC<IProps> = ({
   loading,
   data: { getRide: { isDriver = false, ride = null } = {} } = {},
+  data,
   cancelRide,
   pickUp,
   redirectToChat,
@@ -53,7 +54,6 @@ const RidePresenter: React.SFC<IProps> = ({
     <Header>Quest</Header>
     {!loading && ride && (
       <Container>
-        {console.log(ride)}
         <DataRow>
           <ItemValue>{isDriver ? "Your customer" : "Your deliver"}</ItemValue>
         </DataRow>
@@ -95,7 +95,7 @@ const RidePresenter: React.SFC<IProps> = ({
           text={`💬 Send message to ${isDriver ? "customer" : "deliver"}`}
         />
 
-        {isDriver && (
+        {!isDriver && (
           <React.Fragment>
             {ride.status === ONROUTE && (
               <Button
@@ -104,6 +104,10 @@ const RidePresenter: React.SFC<IProps> = ({
                 onClick={finishRide}
               />
             )}
+          </React.Fragment>
+        )}
+        {isDriver && (
+          <React.Fragment>
             {ride.status !== ONROUTE && (
               <Button onClick={pickUp} bgColor={"#1abc9c"} text={"Picked up"} />
             )}
@@ -111,6 +115,12 @@ const RidePresenter: React.SFC<IProps> = ({
         )}
 
         <Button onClick={cancelRide} bgColor={"#e74c3c"} text={"Cancel"} />
+      </Container>
+    )}
+    {!loading && ride === null && (
+      <Container>
+        <div>error</div>
+        <div>Contact to 010-8297-0157</div>
       </Container>
     )}
   </Wrapper>

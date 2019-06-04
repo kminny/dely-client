@@ -29,6 +29,21 @@ const Icon = styled.button`
   }
 `;
 
+const PhoneError = styled.div`
+  background-color: #e74c3c;
+  width: 100%;
+  color: white;
+  padding: 30px 15px;
+  position: absolute;
+  cursor: pointer;
+  bottom: 0;
+  z-index: 10;
+`;
+
+const FakeLink = styled.span`
+  text-decoration: underline;
+`;
+
 const Map = styled.div`
   position: absolute;
   width: 100vw;
@@ -42,7 +57,7 @@ class HomePresenter extends React.Component<IHomePresenterProps> {
     closeMenu: PropTypes.func.isRequired,
     isMenuOpen: PropTypes.bool.isRequired,
     me: PropTypes.object,
-    redirectToVerify: PropTypes.func.isRequired,
+    redirectToEditAccount: PropTypes.func.isRequired,
     loading: PropTypes.bool.isRequired,
     children: PropTypes.oneOfType([
       PropTypes.arrayOf(PropTypes.node),
@@ -55,7 +70,10 @@ class HomePresenter extends React.Component<IHomePresenterProps> {
       openMenu,
       isMenuOpen,
       closeMenu,
+      me,
+      loading,
       mapRef,
+      redirectToEditAccount,
       children,
       showMarker
     } = this.props;
@@ -86,7 +104,11 @@ class HomePresenter extends React.Component<IHomePresenterProps> {
             <FontAwesome name={"bars"} />
           </Icon>
         </Sidebar>
-
+        {!loading && !me.user.major && (
+          <PhoneError onClick={redirectToEditAccount}>
+            You need to update your major <FakeLink>tap here to do it</FakeLink>
+          </PhoneError>
+        )}
         {showMarker && <Marker />}
         <Map innerRef={mapRef} />
         {children}

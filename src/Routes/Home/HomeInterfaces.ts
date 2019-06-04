@@ -42,7 +42,7 @@ export interface IHomePresenterProps {
   openMenu: () => void;
   closeMenu: () => void;
   me: any;
-  redirectToVerify: () => void;
+  redirectToEditAccount: () => void;
   loading: boolean;
   mapRef: any;
   showMarker: boolean;
@@ -66,4 +66,5 @@ export interface IDriverElementsProps {
   hasRequest: boolean;
   request: any;
   acceptRide: () => void;
+  cancelRide: () => void;
 }

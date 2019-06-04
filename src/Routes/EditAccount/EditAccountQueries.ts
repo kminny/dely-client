@@ -8,6 +8,7 @@ export const UPDATE_ACCOUNT = gql`
     $phoneNumber: String
     $password: String
     $profilePhoto: String
+    $major: String
   ) {
     updateUser(
       email: $email
@@ -16,6 +17,7 @@ export const UPDATE_ACCOUNT = gql`
       phoneNumber: $phoneNumber
       password: $password
       profilePhoto: $profilePhoto
+      major: $major
     ) {
       ok
       error
@@ -25,6 +27,7 @@ export const UPDATE_ACCOUNT = gql`
         phoneNumber
         email
         profilePhoto
+        major
       }
     }
   }

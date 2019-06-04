@@ -57,6 +57,7 @@ export const UPDATE_RIDE = gql`
     $driverRating: Float
     $passengerRating: Float
     $driverId: Int
+    $canceledBy: Int
   ) {
     updateRide(
       rideId: $rideId
@@ -64,6 +65,7 @@ export const UPDATE_RIDE = gql`
       driverRating: $driverRating
       passengerRating: $passengerRating
       driverId: $driverId
+      canceledBy: $canceledBy
     ) {
       ok
     }

@@ -4,6 +4,8 @@ import React from "react";
 import { compose, graphql, MutationUpdaterFn } from "react-apollo";
 import ReactDOM from "react-dom";
 import { toast } from "react-toastify";
+// import styled from "styled-components";
+// import Form from "../../Components/Form";
 import {
   GET_RIDE,
   ME,
@@ -25,6 +27,26 @@ import {
 import UserElements from "./UserElements";
 
 const ACCEPTED = "ACCEPTED";
+
+/*
+const Container = styled.div`
+  position: absolute;
+  margin: auto;
+  width: 80vw;
+  height: 100vw;
+  background-color: white;
+  box-shadow: ${props => props.theme.boxShadow};
+  border-radius: 5px;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+`;
+*/
 
 class HomeContainer extends React.Component<
   IHomeContainerProps,
@@ -54,7 +76,6 @@ class HomeContainer extends React.Component<
       request: undefined,
       status: "idle"
     };
-    console.log(this.props);
 
     this.driverMarkers = [];
     this.mapRef = React.createRef();
@@ -71,6 +92,14 @@ class HomeContainer extends React.Component<
       throttle(this.handleRotation, 5000, { trailing: true, leading: true }),
       true
     );
+  }
+
+  componentDidUpdate() {
+    const { request } = this.state;
+    console.log(this.state);
+    if (request === "CANCELED") {
+      window.location.reload();
+    }
   }
 
   componentWillReceiveProps(nextProps) {
@@ -117,7 +146,7 @@ class HomeContainer extends React.Component<
         isMenuOpen={isMenuOpen}
         openMenu={this.openMenu}
         closeMenu={this.closeMenu}
-        redirectToVerify={this.redirectToVerify}
+        redirectToEditAccount={this.redirectToEditAccount}
         me={me}
         loading={loading}
         mapRef={this.mapRef}
@@ -128,6 +157,7 @@ class HomeContainer extends React.Component<
             hasRequest={hasRequest}
             request={request}
             acceptRide={this.acceptRide}
+            cancelRide={this.cancelRide}
           />
         ) : (
           <UserElements
@@ -146,9 +176,9 @@ class HomeContainer extends React.Component<
     );
   }
 
-  private redirectToVerify = () => {
+  private redirectToEditAccount = () => {
     const { history } = this.props;
-    history.push("/add-phone");
+    history.push("/edit-account");
   };
 
   private openMenu = () => {
@@ -380,6 +410,16 @@ class HomeContainer extends React.Component<
     }
   };
 
+  /*
+  private addProduct = (): void => {
+    const {fromAddress, toAddress} = this.state;
+    <Container>
+        <Form onSubmit={onSubmit}></Form>
+    </Container>;
+    this.setState(this.createToMarket);
+  };
+  */
+
   private createToMarket = (): void => {
     const { toLng, toLat, lat, lng } = this.state;
     if (this.toMarker) {
@@ -469,13 +509,9 @@ class HomeContainer extends React.Component<
   private setPrice = () => {
     // set price by straight distance calculated by lat, lng
 
-    const { distance } = this.state;
     const straightDistance: number = this.getStraightDistance();
     const defaultPriceInsideSchool: number = 1300;
     const defaultPriceOutsideSchool: number = 2000;
-
-    console.log(distance);
-    console.log(straightDistance);
 
     // within 2.5km ( inside of the school )
     // 0.28 won per meter
@@ -532,7 +568,6 @@ class HomeContainer extends React.Component<
     cache,
     { data }: { data: any }
   ) => {
-    console.log("From postRequestRide", data);
     const { requestRide } = data;
     const { GetRideQuery } = this.props;
     if (!requestRide.ok && requestRide.error) {
@@ -555,7 +590,6 @@ class HomeContainer extends React.Component<
         document: RIDE_EVENTS_SUBSCRIPTION,
         updateQuery: (prev, { subscriptionData }) => {
           const ride = subscriptionData.data.rideUpdate;
-
           if (ride.status === ACCEPTED) {
             toast.success("We have found a deliver!");
             this.redirectToRideScreen();
@@ -577,7 +611,6 @@ class HomeContainer extends React.Component<
     if (this.map) {
       for (const driver of drivers) {
         const { lastLat, lastLng, id: driverId, lastOrientation } = driver;
-
         const driverPosition: google.maps.LatLng = new google.maps.LatLng(
           lastLat,
           lastLng

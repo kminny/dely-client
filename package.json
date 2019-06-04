@@ -32,6 +32,7 @@
     "react-router-dom": "^4.2.2",
     "react-scripts-ts": "2.16.0",
     "react-sidebar": "^2.3.2",
+    "react-stripe-elements": "^3.0.0",
     "react-toastify": "^4.0.1",
     "react-transition-group": "^2.3.1",
     "styled-components": "^3.2.6",

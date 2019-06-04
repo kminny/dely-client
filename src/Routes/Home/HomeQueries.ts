@@ -20,6 +20,7 @@ export const GET_DRIVERS = gql`
         lastLng
         id
         lastOrientation
+        currentRideId
       }
     }
   }

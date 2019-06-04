@@ -27,7 +27,8 @@ const Container = styled.div`
 const DriverElements: React.SFC<IDriverElementsProps> = ({
   hasRequest,
   request,
-  acceptRide
+  acceptRide,
+  cancelRide
 }) =>
   hasRequest && request && request.status === "REQUESTING" ? (
     <Container>
@@ -53,7 +54,7 @@ const DriverElements: React.SFC<IDriverElementsProps> = ({
         <Button onClick={acceptRide} text={"Accept Request"} />
       )}
       {request.status !== "REQUESTING" && (
-        <Button onClick={acceptRide} text={"Cancel"} />
+        <Button onClick={cancelRide} text={"Cancel"} />
       )}
     </Container>
   ) : null;

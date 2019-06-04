@@ -12,6 +12,7 @@ interface IState {
   email: string;
   password: string;
   profilePhoto: string;
+  major: string;
 }
 
 class EditAccountContainer extends React.Component<any, IState> {
@@ -23,7 +24,8 @@ class EditAccountContainer extends React.Component<any, IState> {
       phoneNumber: "",
       email: "",
       password: "",
-      profilePhoto: ""
+      profilePhoto: "",
+      major: ""
     };
   }
 
@@ -34,13 +36,21 @@ class EditAccountContainer extends React.Component<any, IState> {
     if (me) {
       const { ok, user } = me;
       if (ok) {
-        const { firstName, lastName, phoneNumber, email, profilePhoto } = user;
+        const {
+          firstName,
+          lastName,
+          phoneNumber,
+          email,
+          profilePhoto,
+          major
+        } = user;
         this.setState({
           firstName,
           lastName,
           phoneNumber,
           email,
-          profilePhoto
+          profilePhoto,
+          major
         });
       }
     }
@@ -53,7 +63,8 @@ class EditAccountContainer extends React.Component<any, IState> {
       phoneNumber,
       email,
       password,
-      profilePhoto
+      profilePhoto,
+      major
     } = this.state;
     return (
       <Mutation
@@ -64,7 +75,8 @@ class EditAccountContainer extends React.Component<any, IState> {
           phoneNumber,
           email,
           password,
-          profilePhoto
+          profilePhoto,
+          major
         }}
         update={this.handlePostSubmit}
         refetchQueries={[{ query: ME }]}
@@ -80,6 +92,7 @@ class EditAccountContainer extends React.Component<any, IState> {
             loading={loading}
             password={password}
             profilePhoto={profilePhoto}
+            major={major}
             getProfileImage={this.getProfileImage}
           />
         )}

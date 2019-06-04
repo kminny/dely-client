@@ -19,6 +19,7 @@ interface IProps {
   loading: boolean;
   password: string;
   profilePhoto: string;
+  major: string;
   getProfileImage: (url: string) => void;
 }
 
@@ -32,6 +33,7 @@ const EditAccountPresenter: React.SFC<IProps> = ({
   onSubmit,
   password,
   profilePhoto,
+  major,
   getProfileImage
 }) => (
   <Wrapper>
@@ -61,6 +63,14 @@ const EditAccountPresenter: React.SFC<IProps> = ({
           type={"text"}
           required={true}
           displayName={"Last Name"}
+        />
+        <Input
+          onChange={handleInputChange}
+          value={major}
+          name={"major"}
+          type={"text"}
+          required={true}
+          displayName={"Major"}
         />
         <Input
           onChange={handleInputChange}

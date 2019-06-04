@@ -1,8 +1,9 @@
 import { SubscribeToMoreOptions } from "apollo-client";
 import React from "react";
-import { graphql, MutationFn, Query } from "react-apollo";
+import { compose, graphql, MutationFn, Query } from "react-apollo";
 import {
   GET_RIDE,
+  ME,
   RIDE_EVENTS_SUBSCRIPTION,
   UPDATE_RIDE
 } from "../../sharedQueries";
@@ -12,6 +13,7 @@ interface IProps {
   location: any;
   history: any;
   UpdateRideMutation: MutationFn;
+  MeQuery: any;
 }
 
 const ONROUTE = "ONROUTE";
@@ -34,7 +36,7 @@ class RideContainer extends React.Component<IProps> {
     } = this.props;
 
     return (
-      <Query query={GET_RIDE} variables={{ skip: false, rideId }}>
+      <Query query={GET_RIDE} variables={{ rideId, skip: false }}>
         {({ data, loading, subscribeToMore }) => {
           const subscribeOptions: SubscribeToMoreOptions = {
             document: RIDE_EVENTS_SUBSCRIPTION,
@@ -90,17 +92,21 @@ class RideContainer extends React.Component<IProps> {
 
   private cancelRide = () => {
     const {
+      MeQuery: { me: { user: { id = 0 } = {} } = {} } = {},
       location: {
         state: { rideId }
       }
     } = this.props;
     const { UpdateRideMutation } = this.props;
-    UpdateRideMutation({
-      variables: {
-        rideId,
-        status: CANCELED
-      }
-    });
+    if (id !== 0) {
+      UpdateRideMutation({
+        variables: {
+          rideId,
+          status: CANCELED,
+          canceledBy: id
+        }
+      });
+    }
   };
 
   private pickUp = () => {
@@ -109,6 +115,7 @@ class RideContainer extends React.Component<IProps> {
         state: { rideId }
       }
     } = this.props;
+
     const { UpdateRideMutation } = this.props;
     UpdateRideMutation({
       variables: {
@@ -147,6 +154,9 @@ class RideContainer extends React.Component<IProps> {
   };
 }
 
-export default graphql<any, any>(UPDATE_RIDE, {
-  name: "UpdateRideMutation"
-})(RideContainer);
+export default compose(
+  graphql(ME, { name: "MeQuery" }),
+  graphql<any, any>(UPDATE_RIDE, {
+    name: "UpdateRideMutation"
+  })
+)(RideContainer);

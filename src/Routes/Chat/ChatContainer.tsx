@@ -40,7 +40,6 @@ class ChatContainer extends React.Component<IProps, IState> {
       location: { state: { rideId = 0 } = {} }
     } = this.props;
     const { message } = this.state;
-
     return (
       <Query
         query={GET_CHAT}
@@ -72,13 +71,16 @@ class ChatContainer extends React.Component<IProps, IState> {
     if (!subscriptionData.data) {
       return previousData;
     }
-    const { data: { newMessage = " " } = " " } = subscriptionData;
+    const { data: { newMessage = {} } = {} } = subscriptionData;
 
     const {
-      getChat: { chat: { messages = " " } = " " }
+      getChat: { chat: { messages = {} } = {} }
     } = previousData;
 
     const lastMessage = messages[messages.length - 1];
+
+    console.log(newMessage);
+    console.log(lastMessage);
 
     if (newMessage.id === lastMessage.id) {
       return;

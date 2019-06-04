@@ -9,6 +9,7 @@ import {
 } from "react-router-dom";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 import styled from "styled-components";
+import Stripe from "../../Components/Stripe";
 import AddPhone from "../../Routes/AddPhone";
 import AddPlace from "../../Routes/AddPlace";
 import Chat from "../../Routes/Chat";
@@ -97,6 +98,7 @@ const LoggedInRoutes: React.SFC<any> = ({ location }) => (
           <Route path={"/places"} component={Places} />
           <Route path={"/add-place"} component={AddPlace} />
           <Route path={"/trips"} component={Trips} />
+          <Route path={"/stripe"} component={Stripe} />
           <Route path="/verify-email/:key" component={VerifyEmail} />
           <Route path="/add-phone" component={AddPhone} />
           <Route path="/find-address" component={FindAddress} />

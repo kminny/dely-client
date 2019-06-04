@@ -18,6 +18,7 @@ class SettingsContainer extends React.Component {
                 logUserOut={logUserOut}
                 loading={loading}
                 data={data}
+                onErrorRefresh={this.onErrorRefresh}
               />
             )}
           </Query>
@@ -25,6 +26,10 @@ class SettingsContainer extends React.Component {
       </Mutation>
     );
   }
+
+  private onErrorRefresh = () => {
+    location.reload();
+  };
 }
 
 export default SettingsContainer;

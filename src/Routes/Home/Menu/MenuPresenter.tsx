@@ -92,7 +92,6 @@ const MenuPresenter: React.SFC<IProps> = ({
   toggleDriving
 }) => (
   <Container>
-    {console.log(user)}
     <Header>
       {loading ? (
         <Placeholder>
