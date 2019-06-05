@@ -11,6 +11,7 @@ const Button = styled<any, any>("input")`
   font-size: 16px;
   border: 0;
   cursor: pointer;
+  justify-content: center;
   font-weight: 500;
   &:active,
   &:focus {

@@ -16,9 +16,36 @@ const Container = styled.div`
   left: 0;
   right: 0;
   width: 80%;
-  height: 65%;
+  height: 70%;
   z-index: 9;
   padding: 20px;
+`;
+
+const ExtendedContainer = styled.div`
+  background-color: white;
+  position: absolute;
+  margin: auto;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 80%;
+  height: 50%;
+  z-index: 9;
+  padding: 20px;
+`;
+
+const Title = styled.h4`
+  font-weight: 800;
+  margin-top: 30px;
+  margin-bottom: 10px;
+  &:first-child {
+    margin-top: 0;
+  }
+`;
+
+const Data = styled.span`
+  color: ${props => props.theme.blueColor};
 `;
 
 const UserElements: React.SFC<IUserElementsProps> = ({
@@ -81,6 +108,24 @@ const UserElements: React.SFC<IUserElementsProps> = ({
         <Button text={"Confirm"} onClick={addedProductToTrue} />
       </Container>
     )}
+    {status === "foundDirections" && addedProduct === true && (
+      <ExtendedContainer>
+        <Title>Start Address</Title>
+        <Data>{startAddress}</Data>
+        <Title>End Address</Title>
+        <Data>{endAddress}</Data>
+        <Title>Product</Title>
+        <Data>{product}</Data>
+        <br />
+        <br />
+        <br />
+        <Button
+          width={"90%"}
+          onClick={requestRide}
+          text={`Request Dely (￦${price})`}
+        />
+      </ExtendedContainer>
+    )}
     <AbsContainer top={false}>
       {status === "choosingFromMap" && (
         <Button
@@ -98,16 +143,10 @@ const UserElements: React.SFC<IUserElementsProps> = ({
         />
       )}
 
-      {status === "foundDirections" && addedProduct === true && (
-        <Button
-          width={"90%"}
-          onClick={requestRide}
-          text={`Request Dely (￦${price})`}
-        />
-      )}
       {status === "requesting" && (
         <React.Fragment>
           <Button width={"90%"} onClick={null} text={`Finding deliver...`} />
+          <br />
           <Button
             width={"90%"}
             onClick={cancelRide}
