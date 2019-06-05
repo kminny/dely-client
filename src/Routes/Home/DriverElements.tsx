@@ -47,6 +47,10 @@ const DriverElements: React.SFC<IDriverElementsProps> = ({
         <ItemValue>{request.dropOffLocation}</ItemValue>
       </DataRow>
       <DataRow>
+        <ItemTitle>Product:</ItemTitle>
+        <ItemValue>{request.product}</ItemValue>
+      </DataRow>
+      <DataRow>
         <ItemTitle>Price:</ItemTitle>
         <ItemValue>￦{request.price}</ItemValue>
       </DataRow>

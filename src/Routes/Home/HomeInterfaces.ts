@@ -22,6 +22,10 @@ export interface IHomeContainerState {
   hasRequest: boolean;
   request: any;
   status: status;
+  addedProduct: boolean;
+  startAddress: string;
+  endAddress: string;
+  product: string;
 }
 
 export interface IHomeContainerProps {
@@ -60,6 +64,11 @@ export interface IUserElementsProps {
   price: number | undefined;
   status: status;
   cancelRide: () => void;
+  addedProduct: boolean;
+  addedProductToTrue: () => void;
+  startAddress: string;
+  endAddress: string;
+  product: string;
 }
 
 export interface IDriverElementsProps {

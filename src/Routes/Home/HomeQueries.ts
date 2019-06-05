@@ -48,6 +48,7 @@ export const REQUEST_RIDE = gql`
     $pickUpLng: Float!
     $dropOffLat: Float!
     $dropOffLng: Float!
+    $product: String!
   ) {
     requestRide(
       pickUpLocation: $pickUpLocation
@@ -59,6 +60,7 @@ export const REQUEST_RIDE = gql`
       price: $price
       distance: $distance
       duration: $duration
+      product: $product
     ) {
       ok
       ride {
@@ -86,6 +88,7 @@ export const GET_RIDE_REQUEST = gql`
         pickUpLocation
         dropOffLocation
         status
+        product
       }
       error
     }
@@ -106,6 +109,7 @@ export const RIDE_REQUEST_SUBSCRIPTION = gql`
       pickUpLocation
       dropOffLocation
       price
+      product
     }
   }
 `;

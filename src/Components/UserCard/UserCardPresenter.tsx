@@ -6,6 +6,7 @@ import { ItemTitle, ItemValue } from "../Shared";
 interface IProps {
   photo: string;
   name: string;
+  phoneNumber?: string;
   major?: string;
   rating?: number;
 }
@@ -29,7 +30,8 @@ const UserCardPresenter: React.SFC<IProps> = ({
   photo,
   name,
   major,
-  rating
+  rating,
+  phoneNumber
 }) => (
   <User>
     <Image src={photo} />
@@ -38,6 +40,9 @@ const UserCardPresenter: React.SFC<IProps> = ({
       <br />
       <br />
       <ItemValue>{major}</ItemValue>
+      <br />
+      <br />
+      {phoneNumber && <ItemTitle>PHONE: {phoneNumber}</ItemTitle>}
       {rating && <ItemTitle>{rating}</ItemTitle>}
     </Column>
   </User>
@@ -47,7 +52,8 @@ UserCardPresenter.propTypes = {
   photo: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   major: PropTypes.string,
-  rating: PropTypes.number
+  rating: PropTypes.number,
+  phoneNumber: PropTypes.string
 };
 
 export default UserCardPresenter;

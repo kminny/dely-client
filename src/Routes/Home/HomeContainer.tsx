@@ -74,7 +74,11 @@ class HomeContainer extends React.Component<
       price: undefined,
       hasRequest: false,
       request: undefined,
-      status: "idle"
+      addedProduct: false,
+      status: "idle",
+      startAddress: "",
+      endAddress: "",
+      product: ""
     };
 
     this.driverMarkers = [];
@@ -94,6 +98,7 @@ class HomeContainer extends React.Component<
     );
   }
 
+  /*
   componentDidUpdate() {
     const { request } = this.state;
     console.log(this.state);
@@ -101,6 +106,7 @@ class HomeContainer extends React.Component<
       window.location.reload();
     }
   }
+  */
 
   componentWillReceiveProps(nextProps) {
     const {
@@ -108,6 +114,7 @@ class HomeContainer extends React.Component<
       GetDriversQuery: { getDrivers: { drivers = null } = {} } = {}
     } = nextProps;
     const { MeQuery: { me: { user = null } = {} } = {}, history } = this.props;
+
     if (drivers) {
       if (this.map) {
         this.drawDrivers(drivers);
@@ -118,6 +125,11 @@ class HomeContainer extends React.Component<
     }
     if (user) {
       if (user.currentRideId) {
+        this.setState({
+          status: "requesting"
+        });
+      }
+      if (user.currentRideId && user.isTaken) {
         history.push({
           pathname: "/ride",
           state: {
@@ -135,7 +147,11 @@ class HomeContainer extends React.Component<
       price,
       status,
       hasRequest,
-      request
+      request,
+      addedProduct,
+      startAddress,
+      endAddress,
+      product
     } = this.state;
     const {
       MeQuery: { loading, me }
@@ -170,11 +186,22 @@ class HomeContainer extends React.Component<
             price={price}
             status={status}
             cancelRide={this.cancelRide}
+            addedProduct={addedProduct}
+            addedProductToTrue={this.addedProductToTrue}
+            startAddress={startAddress}
+            endAddress={endAddress}
+            product={product}
           />
         )}
       </HomePresenter>
     );
   }
+
+  private addedProductToTrue = () => {
+    this.setState({
+      addedProduct: true
+    });
+  };
 
   private redirectToEditAccount = () => {
     const { history } = this.props;
@@ -539,7 +566,10 @@ class HomeContainer extends React.Component<
       toAddress,
       price,
       distance,
-      duration
+      duration,
+      startAddress,
+      endAddress,
+      product
     } = this.state;
     if (toLat === 0 || toLng === 0) {
       toast.error("Can't order quest. Choose an starting address");
@@ -547,15 +577,16 @@ class HomeContainer extends React.Component<
     }
     RequestRideMutation({
       variables: {
-        pickUpLocation: fromAddress,
+        pickUpLocation: fromAddress + " " + startAddress,
         pickUpLat: lat,
         pickUpLng: lng,
-        dropOffLocation: toAddress,
+        dropOffLocation: toAddress + " " + endAddress,
         dropOffLat: toLat,
         dropOffLng: toLng,
         price,
         distance,
-        duration
+        duration,
+        product
       },
       update: this.postRequestRide
     });
@@ -677,9 +708,12 @@ class HomeContainer extends React.Component<
       window.location.reload();
     }
   };
+
   private redirectToRideScreen = () => {
     const { request } = this.state;
     const { history } = this.props;
+    console.log(this.props);
+    console.log(this.state);
     setTimeout(() => {
       history.push({
         pathname: "/ride",
@@ -689,9 +723,8 @@ class HomeContainer extends React.Component<
       });
     }, 1500);
   };
+
   private cancelRide = () => {
-    console.log(this.props);
-    console.log(this.state);
     const { request } = this.state;
     const { UpdateRideMutation } = this.props;
     UpdateRideMutation({

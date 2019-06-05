@@ -33,6 +33,7 @@ export const ME = gql`
         profilePhoto
         verifiedPhoneNumber
         isDriving
+        isTaken
         currentRideId
         balance
         major
@@ -102,6 +103,7 @@ export const GET_RIDE = gql`
         dropOffLocation
         price
         status
+        product
       }
       isDriver
     }

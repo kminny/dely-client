@@ -1,9 +1,25 @@
 import PropTypes from "prop-types";
 import React from "react";
+import styled from "styled-components";
 import AddressInput from "../../Components/AddressInput";
 import Button from "../../Components/Button";
+import Input from "../../Components/Input";
 import { IUserElementsProps } from "./HomeInterfaces";
 import { AbsContainer, Btn } from "./HomeStyled";
+
+const Container = styled.div`
+  background-color: white;
+  position: absolute;
+  margin: auto;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 80%;
+  height: 65%;
+  z-index: 9;
+  padding: 20px;
+`;
 
 const UserElements: React.SFC<IUserElementsProps> = ({
   toAddress,
@@ -14,7 +30,12 @@ const UserElements: React.SFC<IUserElementsProps> = ({
   requestRide,
   price,
   status,
-  cancelRide
+  cancelRide,
+  addedProduct,
+  addedProductToTrue,
+  startAddress,
+  endAddress,
+  product
 }) => (
   <React.Fragment>
     <AbsContainer top={true}>
@@ -23,7 +44,7 @@ const UserElements: React.SFC<IUserElementsProps> = ({
         name={"toAddress"}
         onChange={handleInputChange}
         onSubmit={submitAddress}
-        placeholder={"Where to?"}
+        placeholder={"요구의 목적지를 입력하세요."}
         width={"90%"}
         disabled={status === "choosingFromMap"}
       />
@@ -31,6 +52,35 @@ const UserElements: React.SFC<IUserElementsProps> = ({
         {status === "choosingFromMap" ? "Stop choosing" : "Choose from map"}
       </Btn>
     </AbsContainer>
+    {status === "foundDirections" && addedProduct === false && (
+      <Container>
+        <Input
+          onChange={handleInputChange}
+          value={startAddress}
+          name={"startAddress"}
+          type={"text"}
+          required={true}
+          displayName={"Start Address detail"}
+        />
+        <Input
+          onChange={handleInputChange}
+          value={endAddress}
+          name={"endAddress"}
+          type={"text"}
+          required={true}
+          displayName={"To Address detail"}
+        />
+        <Input
+          onChange={handleInputChange}
+          value={product}
+          name={"product"}
+          type={"text"}
+          required={true}
+          displayName={"Product"}
+        />
+        <Button text={"Confirm"} onClick={addedProductToTrue} />
+      </Container>
+    )}
     <AbsContainer top={false}>
       {status === "choosingFromMap" && (
         <Button
@@ -47,7 +97,8 @@ const UserElements: React.SFC<IUserElementsProps> = ({
           text={"Finding directions"}
         />
       )}
-      {status === "foundDirections" && (
+
+      {status === "foundDirections" && addedProduct === true && (
         <Button
           width={"90%"}
           onClick={requestRide}
@@ -78,7 +129,9 @@ UserElements.propTypes = {
   requestRide: PropTypes.func.isRequired,
   price: PropTypes.number,
   status: PropTypes.string.isRequired,
-  cancelRide: PropTypes.func
+  cancelRide: PropTypes.func,
+  addedProduct: PropTypes.bool,
+  addedProductToTrue: PropTypes.func
 };
 
 export default UserElements;

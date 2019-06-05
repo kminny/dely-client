@@ -61,13 +61,15 @@ const RidePresenter: React.SFC<IProps> = ({
           <UserCard
             name={ride.passenger.fullName}
             major={ride.passenger.major}
-            photo="/home/kmseo/img/person.png"
+            photo={ride.passenger.profilePhoto}
+            phoneNumber={ride.passenger.phoneNumber}
           />
         ) : (
           <UserCard
             name={ride.driver.fullName}
             major={ride.driver.major}
             photo={ride.driver.profilePhoto}
+            phoneNumber={ride.driver.phoneNumber}
           />
         )}
         <DataRow>
@@ -77,6 +79,10 @@ const RidePresenter: React.SFC<IProps> = ({
         <DataRow>
           <ItemTitle>To:</ItemTitle>
           <ItemValue>{ride.dropOffLocation}</ItemValue>
+        </DataRow>
+        <DataRow>
+          <ItemTitle>Product:</ItemTitle>
+          <ItemValue>{ride.product}</ItemValue>
         </DataRow>
         <DataRow>
           <ItemTitle>Price:</ItemTitle>
