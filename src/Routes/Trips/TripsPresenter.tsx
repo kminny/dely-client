@@ -17,10 +17,12 @@ const Wrapper = styled.div`
 const TripsPresenter: React.SFC = () => (
   <Wrapper className={"shouldScroll"}>
     <Helmet>
-      <title> Trips | dely</title>
+      <title> Deliveries | dely</title>
     </Helmet>
-    <Header backTo="/" title={"Your Trips"} />
-    <Container />
+    <Header backTo="/" title={"Your Deliveries"} />
+    <Container>
+      <div>준비중입니다.</div>
+    </Container>
   </Wrapper>
 );
 

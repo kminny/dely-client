@@ -32,7 +32,7 @@ const DriverElements: React.SFC<IDriverElementsProps> = ({
 }) =>
   hasRequest && request && request.status === "REQUESTING" ? (
     <Container>
-      {console.log(request)}
+      {console.log(hasRequest, request, acceptRide, cancelRide)}
       <UserCard
         photo={request.passenger.profilePhoto}
         name={request.passenger.fullName}
@@ -61,7 +61,15 @@ const DriverElements: React.SFC<IDriverElementsProps> = ({
         <Button onClick={cancelRide} text={"Cancel"} />
       )}
     </Container>
-  ) : null;
+  ) : (
+    <Container>
+      <div>hi</div>
+      {console.log(hasRequest)}
+      {console.log(request)}
+      {console.log(acceptRide)}
+      {console.log(cancelRide)}
+    </Container>
+  );
 
 DriverElements.propTypes = {
   hasRequest: PropTypes.bool.isRequired,

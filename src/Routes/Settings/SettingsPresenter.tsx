@@ -81,7 +81,6 @@ const SettingsPresenter: React.SFC<IProps> = ({
       </Container>
     ) : (
       <Container>
-        {console.log(loading, user)}
         <Section first={true}>
           <GridLink to={"/edit-account"}>
             <Image src={user.profilePhoto} />

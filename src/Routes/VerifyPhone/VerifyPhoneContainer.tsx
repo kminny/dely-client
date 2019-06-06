@@ -29,7 +29,6 @@ class VerifyPhoneContainer extends React.Component<any, IState> {
       phone,
       verificationKey: ""
     };
-    console.log(this.state, props);
   }
   render() {
     const { verificationKey, phone } = this.state;
@@ -72,7 +71,6 @@ class VerifyPhoneContainer extends React.Component<any, IState> {
     const { completePhoneSignIn, verifyPhone } = data;
     const { history } = this.props;
     const { phone } = this.state;
-    console.log(this.props, this.state, data);
     if (completePhoneSignIn) {
       if (completePhoneSignIn.error && !completePhoneSignIn.ok) {
         toast.error(completePhoneSignIn.error);

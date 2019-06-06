@@ -51,6 +51,7 @@ class RideContainer extends React.Component<IProps> {
               pickUp={this.pickUp}
               redirectToChat={this.redirectToChat}
               finishRide={this.finishRide}
+              redirectToHome={this.redirectToHome}
             />
           );
         }}
@@ -151,6 +152,12 @@ class RideContainer extends React.Component<IProps> {
         rideId
       }
     });
+  };
+
+  private redirectToHome = () => {
+    const { history } = this.props;
+    history.push("/");
+    location.reload();
   };
 }
 

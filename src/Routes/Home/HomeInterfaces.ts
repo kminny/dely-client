@@ -65,7 +65,7 @@ export interface IUserElementsProps {
   status: status;
   cancelRide: () => void;
   addedProduct: boolean;
-  addedProductToTrue: () => void;
+  addedProductToOpposite: () => void;
   startAddress: string;
   endAddress: string;
   product: string;

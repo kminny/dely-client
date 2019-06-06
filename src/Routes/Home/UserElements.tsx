@@ -30,7 +30,7 @@ const ExtendedContainer = styled.div`
   left: 0;
   right: 0;
   width: 80%;
-  height: 50%;
+  height: 60%;
   z-index: 9;
   padding: 20px;
 `;
@@ -59,7 +59,7 @@ const UserElements: React.SFC<IUserElementsProps> = ({
   status,
   cancelRide,
   addedProduct,
-  addedProductToTrue,
+  addedProductToOpposite,
   startAddress,
   endAddress,
   product
@@ -105,7 +105,11 @@ const UserElements: React.SFC<IUserElementsProps> = ({
           required={true}
           displayName={"Product"}
         />
-        <Button text={"Confirm"} onClick={addedProductToTrue} />
+        <Button
+          width={"100%"}
+          text={"Confirm"}
+          onClick={addedProductToOpposite}
+        />
       </Container>
     )}
     {status === "foundDirections" && addedProduct === true && (
@@ -120,9 +124,17 @@ const UserElements: React.SFC<IUserElementsProps> = ({
         <br />
         <br />
         <Button
-          width={"90%"}
+          width={"100%"}
           onClick={requestRide}
           text={`Request Dely (￦${price})`}
+        />
+        <br />
+        <br />
+        <Button
+          width={"100%"}
+          bgColor={"#a90722"}
+          text={"Change the Quest"}
+          onClick={addedProductToOpposite}
         />
       </ExtendedContainer>
     )}
@@ -170,7 +182,7 @@ UserElements.propTypes = {
   status: PropTypes.string.isRequired,
   cancelRide: PropTypes.func,
   addedProduct: PropTypes.bool,
-  addedProductToTrue: PropTypes.func
+  addedProductToOpposite: PropTypes.func
 };
 
 export default UserElements;

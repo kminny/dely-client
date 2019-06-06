@@ -4,8 +4,6 @@ import React from "react";
 import { compose, graphql, MutationUpdaterFn } from "react-apollo";
 import ReactDOM from "react-dom";
 import { toast } from "react-toastify";
-// import styled from "styled-components";
-// import Form from "../../Components/Form";
 import {
   GET_RIDE,
   ME,
@@ -98,15 +96,13 @@ class HomeContainer extends React.Component<
     );
   }
 
-  /*
   componentDidUpdate() {
     const { request } = this.state;
-    console.log(this.state);
+
     if (request === "CANCELED") {
       window.location.reload();
     }
   }
-  */
 
   componentWillReceiveProps(nextProps) {
     const {
@@ -154,8 +150,10 @@ class HomeContainer extends React.Component<
       product
     } = this.state;
     const {
-      MeQuery: { loading, me }
+      MeQuery: { loading, me },
+      GetRideQuery
     } = this.props;
+    console.log(GetRideQuery);
 
     return (
       <HomePresenter
@@ -187,7 +185,7 @@ class HomeContainer extends React.Component<
             status={status}
             cancelRide={this.cancelRide}
             addedProduct={addedProduct}
-            addedProductToTrue={this.addedProductToTrue}
+            addedProductToOpposite={this.addedProductToOpposite}
             startAddress={startAddress}
             endAddress={endAddress}
             product={product}
@@ -197,9 +195,10 @@ class HomeContainer extends React.Component<
     );
   }
 
-  private addedProductToTrue = () => {
+  private addedProductToOpposite = () => {
+    const { addedProduct } = this.state;
     this.setState({
-      addedProduct: true
+      addedProduct: !addedProduct
     });
   };
 
@@ -687,12 +686,17 @@ class HomeContainer extends React.Component<
 
   private acceptRide = () => {
     const { request } = this.state;
-    const { UpdateRideMutation, MeQuery } = this.props;
+    const { UpdateRideMutation, MeQuery, GetRideQuery } = this.props;
     const {
       me: {
         user: { id }
       }
     } = MeQuery;
+
+    console.log(GetRideQuery);
+    console.log(request);
+    console.log(this.props);
+
     if (request.status === "REQUESTING") {
       UpdateRideMutation({
         variables: {

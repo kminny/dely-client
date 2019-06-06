@@ -31,6 +31,7 @@ interface IProps {
   pickUp: () => void;
   redirectToChat: () => void;
   finishRide: () => void;
+  redirectToHome: () => void;
 }
 
 const ACCEPTED = "ACCEPTED";
@@ -45,7 +46,8 @@ const RidePresenter: React.SFC<IProps> = ({
   cancelRide,
   pickUp,
   redirectToChat,
-  finishRide
+  finishRide,
+  redirectToHome
 }) => (
   <Wrapper>
     <Helmet>
@@ -96,13 +98,12 @@ const RidePresenter: React.SFC<IProps> = ({
           {ride.status === FINISHED && <ItemValue>FINISHED</ItemValue>}
         </DataRow>
 
-        <Button
-          onClick={redirectToChat}
-          text={`💬 Send message to ${isDriver ? "customer" : "deliver"}`}
-        />
-
         {!isDriver && (
           <React.Fragment>
+            <Button
+              onClick={redirectToChat}
+              text={`💬 Send message to ${isDriver ? "customer" : "deliver"}`}
+            />
             {ride.status === ONROUTE && (
               <Button
                 text={"Finish delying"}
@@ -110,17 +111,29 @@ const RidePresenter: React.SFC<IProps> = ({
                 onClick={finishRide}
               />
             )}
+            <Button onClick={cancelRide} bgColor={"#e74c3c"} text={"Cancel"} />
           </React.Fragment>
         )}
-        {isDriver && (
+        {isDriver && ride.status !== FINISHED && (
           <React.Fragment>
-            {ride.status !== ONROUTE && (
+            <Button
+              onClick={redirectToChat}
+              text={`💬 Send message to ${isDriver ? "customer" : "deliver"}`}
+            />
+            {ride.status === ACCEPTED && (
               <Button onClick={pickUp} bgColor={"#1abc9c"} text={"Picked up"} />
             )}
+            <Button onClick={cancelRide} bgColor={"#e74c3c"} text={"Cancel"} />
           </React.Fragment>
         )}
 
-        <Button onClick={cancelRide} bgColor={"#e74c3c"} text={"Cancel"} />
+        {ride.status === FINISHED && (
+          <Button
+            onClick={redirectToHome}
+            bgColor={"#1abc9c"}
+            text={"FINISHED"}
+          />
+        )}
       </Container>
     )}
     {!loading && ride === null && (
