@@ -150,11 +150,8 @@ class HomeContainer extends React.Component<
       product
     } = this.state;
     const {
-      MeQuery: { loading, me },
-      GetRideQuery
+      MeQuery: { loading, me }
     } = this.props;
-    console.log(GetRideQuery);
-
     return (
       <HomePresenter
         isMenuOpen={isMenuOpen}
@@ -686,16 +683,12 @@ class HomeContainer extends React.Component<
 
   private acceptRide = () => {
     const { request } = this.state;
-    const { UpdateRideMutation, MeQuery, GetRideQuery } = this.props;
+    const { UpdateRideMutation, MeQuery } = this.props;
     const {
       me: {
         user: { id }
       }
     } = MeQuery;
-
-    console.log(GetRideQuery);
-    console.log(request);
-    console.log(this.props);
 
     if (request.status === "REQUESTING") {
       UpdateRideMutation({
@@ -716,8 +709,7 @@ class HomeContainer extends React.Component<
   private redirectToRideScreen = () => {
     const { request } = this.state;
     const { history } = this.props;
-    console.log(this.props);
-    console.log(this.state);
+
     setTimeout(() => {
       history.push({
         pathname: "/ride",

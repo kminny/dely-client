@@ -40,8 +40,7 @@ class ChatContainer extends React.Component<IProps, IState> {
       location: { state: { rideId = 0 } = {} }
     } = this.props;
     const { message } = this.state;
-    console.log("props:", this.props);
-    console.log("state:", this.state);
+
     return (
       <Query
         query={GET_CHAT}
