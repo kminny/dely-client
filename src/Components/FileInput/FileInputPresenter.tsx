@@ -38,11 +38,6 @@ const Input = styled.input`
   }
 `;
 
-const Title = styled.span`
-  color: ${props => props.theme.grey};
-  margin-bottom: 20px;
-`;
-
 interface IProps {
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   uploaded: boolean;
@@ -59,7 +54,6 @@ const FileInputPresenter: React.SFC<IProps> = ({
   required
 }) => (
   <Container>
-    <Title>Profile Photo</Title>
     <Input
       onChange={onChange}
       disabled={uploaded && uploading}

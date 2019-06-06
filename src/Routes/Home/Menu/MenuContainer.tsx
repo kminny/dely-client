@@ -50,9 +50,9 @@ class MenuContainer extends React.Component<any, any> {
         query.me.user.isDriving = isDriving;
         cache.writeQuery({ query: ME, data: query });
         if (isDriving) {
-          toast.success("You're now Delying!");
+          toast.success("Dely 시작합니다!");
         } else {
-          toast.success("You are not Delying anymore");
+          toast.success("잠시 휴식..");
         }
       }
     }

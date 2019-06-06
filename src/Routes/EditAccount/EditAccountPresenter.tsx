@@ -40,7 +40,7 @@ const EditAccountPresenter: React.SFC<IProps> = ({
     <Helmet>
       <title>Edit Account | dely</title>
     </Helmet>
-    <Header backTo="/" title={"Edit Account"} />
+    <Header backTo="/" title={"회원 정보 수정"} />
     <Container>
       <Form onSubmit={onSubmit}>
         <FileInput
@@ -54,7 +54,7 @@ const EditAccountPresenter: React.SFC<IProps> = ({
           name={"firstName"}
           type={"text"}
           required={true}
-          displayName={"First Name"}
+          displayName={"이름"}
         />
         <Input
           onChange={handleInputChange}
@@ -62,7 +62,7 @@ const EditAccountPresenter: React.SFC<IProps> = ({
           name={"lastName"}
           type={"text"}
           required={true}
-          displayName={"Last Name"}
+          displayName={"성"}
         />
         <Input
           onChange={handleInputChange}
@@ -70,7 +70,7 @@ const EditAccountPresenter: React.SFC<IProps> = ({
           name={"major"}
           type={"text"}
           required={true}
-          displayName={"Major"}
+          displayName={"소속 학과"}
         />
         <Input
           onChange={handleInputChange}
@@ -78,7 +78,7 @@ const EditAccountPresenter: React.SFC<IProps> = ({
           name={"phoneNumber"}
           type={"tel"}
           required={true}
-          displayName={"Phone Number"}
+          displayName={"핸드폰 번호"}
         />
         <Input
           onChange={handleInputChange}
@@ -86,7 +86,7 @@ const EditAccountPresenter: React.SFC<IProps> = ({
           name={"email"}
           type={"tel"}
           required={true}
-          displayName={"Email"}
+          displayName={"이메일 주소"}
         />
         <Input
           onChange={handleInputChange}
@@ -94,13 +94,10 @@ const EditAccountPresenter: React.SFC<IProps> = ({
           name={"password"}
           type={"password"}
           required={false}
-          displayName={"Password"}
+          displayName={"비밀번호"}
           placeholder={"••••••"}
         />
-        <Button
-          text={loading ? "Updating Profile" : "Update Profile"}
-          disabled={loading}
-        />
+        <Button text={loading ? "적용 중" : "변경"} disabled={loading} />
       </Form>
     </Container>
   </Wrapper>

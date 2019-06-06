@@ -86,7 +86,7 @@ class VerifyPhoneContainer extends React.Component<any, IState> {
             }
           });
         } else {
-          toast.success("Phone number verified!");
+          toast.success("핸드폰 번호가 인증되었습니다.");
           setTimeout(() => {
             history.push({
               pathname: "/complete-profile",
@@ -101,7 +101,7 @@ class VerifyPhoneContainer extends React.Component<any, IState> {
       if (verifyPhone.error && !verifyPhone.ok) {
         toast.error(verifyPhone.error);
       } else if (verifyPhone.ok) {
-        toast.success("Phone number verified");
+        toast.success("핸드폰 번호가 인증되었습니다.");
         const query: any = cache.readQuery({ query: ME });
         if (query) {
           query.me.user.verifiedPhoneNumber = true;

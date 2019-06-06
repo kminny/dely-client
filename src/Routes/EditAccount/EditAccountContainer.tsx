@@ -119,7 +119,7 @@ class EditAccountContainer extends React.Component<any, IState> {
     if (!updateUser.ok && updateUser.error) {
       toast.error(updateUser.error);
     } else if (updateUser.ok) {
-      toast.success("Account successfully updated");
+      toast.success("성공적으로 업데이트 되었습니다.");
     }
   };
 

@@ -43,7 +43,7 @@ const AddPlacePresenter: React.SFC<IProps> = ({
     <Helmet>
       <title>Add Place | dely</title>
     </Helmet>
-    <Header backTo="/places" title={"Add Place"} />
+    <Header backTo="/places" title={"주소 추가"} />
     <Container>
       <Form onSubmit={onSubmit}>
         {lat && lng && (
@@ -53,7 +53,7 @@ const AddPlacePresenter: React.SFC<IProps> = ({
             type={"text"}
             name={"name"}
             required={true}
-            displayName={"Name"}
+            displayName={"이름"}
           />
         )}
         {lat && lng && (
@@ -63,15 +63,15 @@ const AddPlacePresenter: React.SFC<IProps> = ({
             type={"text"}
             name={"address"}
             required={true}
-            displayName={"Address"}
+            displayName={"상세 주소"}
           />
         )}
 
-        <FakeLink onClick={goToFindAddress}>Find address on map</FakeLink>
+        <FakeLink onClick={goToFindAddress}>지도에서 주소 찾기</FakeLink>
 
         <Button
           disabled={loading || !lat || !lng}
-          text={loading ? "Adding place" : "Add place"}
+          text={loading ? "주소 추가 중" : "주소 추가하기"}
         />
       </Form>
     </Container>

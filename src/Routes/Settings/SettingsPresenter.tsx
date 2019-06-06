@@ -36,7 +36,9 @@ const Key = styled.span`
   margin-bottom: 5px;
 `;
 
-const Item = styled<any, any>("div")``;
+const Item = styled<any, any>("div")`
+  cursor: pointer;
+`;
 
 const NoPlaces = styled.div`
   margin-top: 20px;
@@ -70,13 +72,13 @@ const SettingsPresenter: React.SFC<IProps> = ({
     <Helmet>
       <title>Account Settings | dely</title>
     </Helmet>
-    <Header backTo="/" title={"Account Settings"} />
+    <Header backTo="/" title={"계정 정보"} />
     {loading || !user || !places ? (
       <Container>
         <Button
           onClick={onErrorRefresh}
           bgColor={"#a90722"}
-          text={"Caught on Error, Click to Refresh"}
+          text={"Error, 새로고침을 위해 클릭해주세요."}
         />
       </Container>
     ) : (
@@ -93,11 +95,11 @@ const SettingsPresenter: React.SFC<IProps> = ({
         </Section>
 
         <Link to={"/places"}>
-          <Section title="Favorites">
+          <Section title="즐겨찾는 주소">
             {places.length === 0 || !places ? (
               <NoPlaces>
-                You have no favorite places yet.{" "}
-                <FakeLink to={"/add-place"}>Add one</FakeLink>
+                아직 즐겨찾는 주소가 없습니다.{" "}
+                <FakeLink to={"/add-place"}>주소 추가하기</FakeLink>
               </NoPlaces>
             ) : (
               <React.Fragment>
@@ -107,13 +109,13 @@ const SettingsPresenter: React.SFC<IProps> = ({
                   address={places[0].address}
                   id={places[0].id}
                 />
-                <FakeLink>More Saved Places</FakeLink>
+                <FakeLink>더 많은 주소 보기</FakeLink>
               </React.Fragment>
             )}
           </Section>
         </Link>
         <Section last={true}>
-          <Item onClick={logUserOut}>Log Out</Item>
+          <Item onClick={logUserOut}>로그 아웃</Item>
         </Section>
       </Container>
     )}

@@ -77,7 +77,9 @@ const UserElements: React.SFC<IUserElementsProps> = ({
           disabled={status === "choosingFromMap"}
         />
         <Btn onClick={toggleMapChoosing}>
-          {status === "choosingFromMap" ? "Stop choosing" : "Choose from map"}
+          {status === "choosingFromMap"
+            ? "위치 설정 취소"
+            : "지도에서 위치 설정하기"}
         </Btn>
       </AbsContainer>
     )}
@@ -90,7 +92,7 @@ const UserElements: React.SFC<IUserElementsProps> = ({
           name={"startAddress"}
           type={"text"}
           required={true}
-          displayName={"Start Address detail"}
+          displayName={"시작 위치 (ex. 백년관)"}
         />
         <Input
           onChange={handleInputChange}
@@ -98,7 +100,7 @@ const UserElements: React.SFC<IUserElementsProps> = ({
           name={"endAddress"}
           type={"text"}
           required={true}
-          displayName={"To Address detail"}
+          displayName={"목적지 (ex. 기숙사)"}
         />
         <Input
           onChange={handleInputChange}
@@ -106,22 +108,18 @@ const UserElements: React.SFC<IUserElementsProps> = ({
           name={"product"}
           type={"text"}
           required={true}
-          displayName={"Product"}
+          displayName={"물품 종류 (ex. 책, 편의점 물품 구매)"}
         />
-        <Button
-          width={"100%"}
-          text={"Confirm"}
-          onClick={addedProductToOpposite}
-        />
+        <Button width={"100%"} text={"확인"} onClick={addedProductToOpposite} />
       </Container>
     )}
     {status === "foundDirections" && addedProduct === true && (
       <ExtendedContainer>
-        <Title>Start Address</Title>
+        <Title>시작 위치</Title>
         <Data>{startAddress}</Data>
-        <Title>End Address</Title>
+        <Title>목적지</Title>
         <Data>{endAddress}</Data>
-        <Title>Product</Title>
+        <Title>물품 종류</Title>
         <Data>{product}</Data>
         <br />
         <br />
@@ -129,44 +127,35 @@ const UserElements: React.SFC<IUserElementsProps> = ({
         <Button
           width={"100%"}
           onClick={requestRide}
-          text={`Request Dely (￦${price})`}
+          text={`Dely 요청하기 (￦${price})`}
         />
         <br />
         <br />
         <Button
           width={"100%"}
           bgColor={"#a90722"}
-          text={"Change the Quest"}
+          text={"요구 수정하기"}
           onClick={addedProductToOpposite}
         />
       </ExtendedContainer>
     )}
     <AbsContainer top={false}>
       {status === "choosingFromMap" && (
-        <Button
-          width={"90%"}
-          onClick={chooseMapAddress}
-          text={"Pick this place"}
-        />
+        <Button width={"90%"} onClick={chooseMapAddress} text={"완료"} />
       )}
       {status === "findingDirections" && (
-        <Button
-          disabled={true}
-          width={"90%"}
-          onClick={null}
-          text={"Finding directions"}
-        />
+        <Button disabled={true} width={"90%"} onClick={null} text={"찾는 중"} />
       )}
 
       {status === "requesting" && (
         <React.Fragment>
-          <Button width={"90%"} onClick={null} text={`Finding deliver...`} />
+          <Button width={"90%"} onClick={null} text={`배달자 찾는중...`} />
           <br />
           <Button
             width={"90%"}
             onClick={cancelRide}
             bgColor={"#e74c3c"}
-            text={"Cancel"}
+            text={"취소"}
           />
         </React.Fragment>
       )}

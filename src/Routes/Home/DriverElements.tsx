@@ -39,26 +39,26 @@ const DriverElements: React.SFC<IDriverElementsProps> = ({
         major={request.passenger.major}
       />
       <DataRow>
-        <ItemTitle>From:</ItemTitle>
+        <ItemTitle>시작 위치:</ItemTitle>
         <ItemValue>{request.pickUpLocation}</ItemValue>
       </DataRow>
       <DataRow>
-        <ItemTitle>To:</ItemTitle>
+        <ItemTitle>목적지:</ItemTitle>
         <ItemValue>{request.dropOffLocation}</ItemValue>
       </DataRow>
       <DataRow>
-        <ItemTitle>Product:</ItemTitle>
+        <ItemTitle>물품 명:</ItemTitle>
         <ItemValue>{request.product}</ItemValue>
       </DataRow>
       <DataRow>
-        <ItemTitle>Price:</ItemTitle>
+        <ItemTitle>가격:</ItemTitle>
         <ItemValue>￦{request.price}</ItemValue>
       </DataRow>
       {request.status === "REQUESTING" && (
-        <Button onClick={acceptRide} text={"Accept Request"} />
+        <Button onClick={acceptRide} text={"요구 수락"} />
       )}
       {request.status !== "REQUESTING" && (
-        <Button onClick={cancelRide} text={"Cancel"} />
+        <Button onClick={cancelRide} text={"취소"} />
       )}
     </Container>
   ) : (

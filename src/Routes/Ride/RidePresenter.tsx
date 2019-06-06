@@ -57,7 +57,7 @@ const RidePresenter: React.SFC<IProps> = ({
     {!loading && ride && (
       <Container>
         <DataRow>
-          <ItemValue>{isDriver ? "Your customer" : "Your deliver"}</ItemValue>
+          <ItemValue>{isDriver ? "요구자" : "배달자"}</ItemValue>
         </DataRow>
         {isDriver ? (
           <UserCard
@@ -75,64 +75,60 @@ const RidePresenter: React.SFC<IProps> = ({
           />
         )}
         <DataRow>
-          <ItemTitle>From:</ItemTitle>
+          <ItemTitle>시작 위치:</ItemTitle>
           <ItemValue>{ride.pickUpLocation}</ItemValue>
         </DataRow>
         <DataRow>
-          <ItemTitle>To:</ItemTitle>
+          <ItemTitle>목적지:</ItemTitle>
           <ItemValue>{ride.dropOffLocation}</ItemValue>
         </DataRow>
         <DataRow>
-          <ItemTitle>Product:</ItemTitle>
+          <ItemTitle>물품 명:</ItemTitle>
           <ItemValue>{ride.product}</ItemValue>
         </DataRow>
         <DataRow>
-          <ItemTitle>Price:</ItemTitle>
+          <ItemTitle>가격:</ItemTitle>
           <ItemValue>￦{ride.price}</ItemValue>
         </DataRow>
         <DataRow>
-          <ItemTitle>Status:</ItemTitle>
-          {ride.status === ACCEPTED && <ItemValue>Accepted</ItemValue>}
-          {ride.status === ONROUTE && <ItemValue>On Route</ItemValue>}
-          {ride.status === CANCELED && <ItemValue>Canceled</ItemValue>}
-          {ride.status === FINISHED && <ItemValue>FINISHED</ItemValue>}
+          <ItemTitle>상태:</ItemTitle>
+          {ride.status === ACCEPTED && (
+            <ItemValue>수락 (물품 획득 전)</ItemValue>
+          )}
+          {ride.status === ONROUTE && (
+            <ItemValue>물품 획득 후 가는 중</ItemValue>
+          )}
+          {ride.status === CANCELED && <ItemValue>취소됨</ItemValue>}
+          {ride.status === FINISHED && <ItemValue>끝남</ItemValue>}
         </DataRow>
 
         {!isDriver && (
           <React.Fragment>
             <Button
               onClick={redirectToChat}
-              text={`💬 Send message to ${isDriver ? "customer" : "deliver"}`}
+              text={`💬 ${isDriver ? "요구자와 채팅" : "배달자와 채팅"}`}
             />
             {ride.status === ONROUTE && (
-              <Button
-                text={"Finish delying"}
-                bgColor={"#1abc9c"}
-                onClick={finishRide}
-              />
+              <Button text={"완료"} bgColor={"#1abc9c"} onClick={finishRide} />
             )}
-            <Button onClick={cancelRide} bgColor={"#e74c3c"} text={"Cancel"} />
+            <Button onClick={cancelRide} bgColor={"#e74c3c"} text={"취소"} />
           </React.Fragment>
         )}
         {isDriver && ride.status !== FINISHED && (
           <React.Fragment>
             <Button
               onClick={redirectToChat}
-              text={`💬 Send message to ${isDriver ? "customer" : "deliver"}`}
+              text={`💬 ${isDriver ? "요구자와 채팅" : "배달자와 채팅"}`}
             />
             {ride.status === ACCEPTED && (
-              <Button onClick={pickUp} bgColor={"#1abc9c"} text={"Picked up"} />
+              <Button onClick={pickUp} bgColor={"#1abc9c"} text={"물품 획득"} />
             )}
-            <Button onClick={cancelRide} bgColor={"#e74c3c"} text={"Cancel"} />
+            <Button onClick={cancelRide} bgColor={"#e74c3c"} text={"취소"} />
           </React.Fragment>
         )}
 
         {ride.status === FINISHED && (
-          <Button
-            onClick={redirectToHome}
-            bgColor={"#1abc9c"}
-            text={"FINISHED"}
-          />
+          <Button onClick={redirectToHome} bgColor={"#1abc9c"} text={"완료"} />
         )}
       </Container>
     )}

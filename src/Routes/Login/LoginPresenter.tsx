@@ -8,7 +8,6 @@ import countries from "../../countries";
 import BackButton from "./BackButton";
 import Header from "./Header";
 import { loginMethodType } from "./LoginTypes";
-
 import MobileLogin from "./MobileLogin";
 import SocialLogin from "./SocialLogin";
 
@@ -42,7 +41,7 @@ const PhoneInput = styled<any, any>("input")`
   &:disabled {
     background-color: transparent;
     &::placeholder {
-      color: rgba(0, 0, 0, 1);
+      color: rgba(0, 0, 0, 0.3);
     }
   }
 `;
@@ -138,7 +137,7 @@ class LoginPresenter extends React.Component<IProps, {}> {
               </PhoneSelect>
             )}
             <PhoneInput
-              placeholder="Enter your mobile number"
+              placeholder="핸드폰 번호를 입력하세요."
               innerRef={this.textInput}
               type="tel"
               value={phoneNumber}

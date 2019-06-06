@@ -33,7 +33,7 @@ class VerifyEmailContainer extends React.Component<any> {
     if (!verifyEmail.ok && verifyEmail.error) {
       toast.error(verifyEmail.error);
     } else if (verifyEmail.ok) {
-      toast.success("Email verified! Redirecting...");
+      toast.success("이메일 인증이 완료되었습니다.");
       setTimeout(() => history.push("/"), 4000);
     }
   };

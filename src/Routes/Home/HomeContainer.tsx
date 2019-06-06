@@ -280,7 +280,7 @@ class HomeContainer extends React.Component<
       maximumAge: 0
     };
     navigator.geolocation.watchPosition(
-      this.updatePosition, 
+      this.updatePosition,
       this.handleGeoError,
       locationOptions
     );
@@ -571,7 +571,7 @@ class HomeContainer extends React.Component<
       product
     } = this.state;
     if (toLat === 0 || toLng === 0) {
-      toast.error("Can't order quest. Choose an starting address");
+      toast.error("요청할 수 없습니다. 시작 위치를 설정하세요.");
       return;
     }
     RequestRideMutation({
@@ -621,7 +621,7 @@ class HomeContainer extends React.Component<
         updateQuery: (prev, { subscriptionData }) => {
           const ride = subscriptionData.data.rideUpdate;
           if (ride.status === ACCEPTED) {
-            toast.success("We have found a deliver!");
+            toast.success("배달자를 찾았습니다!");
             this.redirectToRideScreen();
           }
         }
@@ -705,10 +705,10 @@ class HomeContainer extends React.Component<
           driverId: id
         }
       });
-      toast.success("Accepted the quest, redirecting you...");
+      toast.success("요구를 수락했습니다. 매칭 화면으로 넘어갑니다.");
       this.redirectToRideScreen();
     } else {
-      toast.error("Already accepted by other user...");
+      toast.error("이미 다른 배달자에 의해 수락되었습니다..");
       window.location.reload();
     }
   };

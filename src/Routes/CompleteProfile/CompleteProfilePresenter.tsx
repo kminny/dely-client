@@ -37,7 +37,7 @@ const CompleteProfilePresenter: React.SFC<IProps> = ({
     <Helmet>
       <title>Complete Profile | dely</title>
     </Helmet>
-    <Header backTo={"/"} title={"Complete your profile"} />
+    <Header backTo={"/"} title={"회원 정보 입력"} />
     <Container>
       <Form onSubmit={onSubmit}>
         <Input
@@ -45,7 +45,7 @@ const CompleteProfilePresenter: React.SFC<IProps> = ({
           value={firstName}
           type={"text"}
           required={true}
-          displayName={"First Name"}
+          displayName={"이름"}
           onChange={handleInputChange}
         />
         <Input
@@ -53,7 +53,7 @@ const CompleteProfilePresenter: React.SFC<IProps> = ({
           value={lastName}
           type={"text"}
           required={true}
-          displayName={"Last Name"}
+          displayName={"성"}
           onChange={handleInputChange}
         />
         <Input
@@ -61,7 +61,7 @@ const CompleteProfilePresenter: React.SFC<IProps> = ({
           value={major}
           type={"text"}
           required={true}
-          displayName={"Major"}
+          displayName={"소속 학과"}
           onChange={handleInputChange}
         />
         <Input
@@ -69,7 +69,7 @@ const CompleteProfilePresenter: React.SFC<IProps> = ({
           value={email}
           type={"email"}
           required={true}
-          displayName={"Email"}
+          displayName={"이메일 주소"}
           onChange={handleInputChange}
         />
         <Input
@@ -77,7 +77,7 @@ const CompleteProfilePresenter: React.SFC<IProps> = ({
           value={age}
           type={"number"}
           required={true}
-          displayName={"Age"}
+          displayName={"나이"}
           onChange={handleInputChange}
         />
         <Input
@@ -85,13 +85,10 @@ const CompleteProfilePresenter: React.SFC<IProps> = ({
           value={password}
           type={"password"}
           required={true}
-          displayName={"Password"}
+          displayName={"비밀번호"}
           onChange={handleInputChange}
         />
-        <Button
-          text={loading ? "Loading" : "Complete Profile"}
-          disabled={loading}
-        />
+        <Button text={loading ? "적용 중" : "완료"} disabled={loading} />
       </Form>
     </Container>
   </Wrapper>

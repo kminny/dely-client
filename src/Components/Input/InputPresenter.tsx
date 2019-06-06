@@ -30,6 +30,7 @@ const Input = styled.input`
   &::placeholder {
     color: black;
   }
+  ime-mode: active;
 `;
 
 interface IProps {

@@ -27,7 +27,7 @@ const VerifyPhonePresenter: React.SFC<IProps> = ({
     <Helmet>
       <title>Verify Phone | dely</title>
     </Helmet>
-    <Header backTo="/" title={"Verify your phone"} />
+    <Header backTo="/" title={"핸드폰 인증"} />
     <Container>
       <Form width={"100%"} onSubmit={onSubmit}>
         <Input
@@ -36,12 +36,9 @@ const VerifyPhonePresenter: React.SFC<IProps> = ({
           value={verificationKey}
           required={true}
           onChange={handleInputChange}
-          displayName={"Enter the verification key sent on the SMS"}
+          displayName={"인증번호 입력"}
         />
-        <Button
-          text={loading ? "Loading" : "Verify phone"}
-          disabled={loading}
-        />
+        <Button text={loading ? "로딩 중" : "완료"} disabled={loading} />
       </Form>
     </Container>
   </Wrapper>

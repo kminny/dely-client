@@ -38,7 +38,7 @@ const EmailLoginPresenter: React.SFC<IProps> = ({
     <Helmet>
       <title>Login with Email | dely</title>
     </Helmet>
-    <Header backTo="/" title={"Login with Email"} />
+    <Header backTo="/" title={"이메일 로그인"} />
     <Container>
       <Form onSubmit={onSubmit}>
         <Input
@@ -47,7 +47,7 @@ const EmailLoginPresenter: React.SFC<IProps> = ({
           type="email"
           required={true}
           name={"email"}
-          displayName={"Email"}
+          displayName={"이메일 주소"}
         />
         <Input
           onChange={handleInputChange}
@@ -55,12 +55,9 @@ const EmailLoginPresenter: React.SFC<IProps> = ({
           type="password"
           required={true}
           name={"password"}
-          displayName={"Password"}
+          displayName={"비밀번호"}
         />
-        <Button
-          text={loading ? "Logging In..." : "Log In"}
-          disabled={loading}
-        />
+        <Button text={loading ? "요청 중" : "로그인"} disabled={loading} />
       </Form>
     </Container>
   </Wrapper>

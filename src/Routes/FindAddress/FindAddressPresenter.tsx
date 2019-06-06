@@ -63,7 +63,7 @@ class FindAddressPresenter extends React.Component<IProps> {
         <AbsContainer top={false}>
           <Button
             onClick={pickAddress}
-            text="Pick place"
+            text="확인"
             disabled={false}
             width="90%"
           />

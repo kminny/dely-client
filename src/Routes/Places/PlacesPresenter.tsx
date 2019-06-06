@@ -31,15 +31,16 @@ const PlacesPresenter: React.SFC<IProps> = ({
     <Helmet>
       <title>Places | dely</title>
     </Helmet>
-    <Header backTo="/settings" title={"Saved Places"} />
+    <Header backTo="/settings" title={"즐겨찾는 주소"} />
     <Container>
       {places.length === 0 ? (
         <NoPlaces>
-          You have no saved places. <SLink to="/add-place">Add one now</SLink>
+          즐겨찾는 주소가 없습니다.{" "}
+          <SLink to="/add-place">지금 추가하세요!</SLink>
         </NoPlaces>
       ) : (
         <React.Fragment>
-          <Section first={true} title={"Favorites"}>
+          <Section first={true} title={"즐겨 찾기"}>
             {places
               .filter((place: any) => place.fav === true)
               .map((place: any) => (
@@ -52,7 +53,7 @@ const PlacesPresenter: React.SFC<IProps> = ({
                 />
               ))}
           </Section>
-          <Section title={"Other Saved Places"}>
+          <Section title={"다른 추가된 주소"}>
             {places
               .filter((place: any) => place.fav === false)
               .map((place: any) => (

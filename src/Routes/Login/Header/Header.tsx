@@ -26,7 +26,7 @@ const StyledHeader = styled<any, any>(PosedHeader)`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 78%;
+  height: 75%;
   will-change: max-height, opacity;
   top: 0;
 `;

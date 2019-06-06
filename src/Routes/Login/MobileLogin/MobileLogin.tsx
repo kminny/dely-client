@@ -56,7 +56,7 @@ const MobileLogin: React.SFC<IProps> = ({ onClick, loginMethod, children }) => (
     loginMethod={loginMethod}
     pose={loginMethod === "social" ? "closed" : "open"}
   >
-    <Title>Get moving with dely</Title>
+    <Title>Get started with dely</Title>
     <span>{children}</span>
   </StyledMobile>
 );

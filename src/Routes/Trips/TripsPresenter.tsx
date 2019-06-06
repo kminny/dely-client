@@ -17,9 +17,9 @@ const Wrapper = styled.div`
 const TripsPresenter: React.SFC = () => (
   <Wrapper className={"shouldScroll"}>
     <Helmet>
-      <title> Deliveries | dely</title>
+      <title> Notes | dely</title>
     </Helmet>
-    <Header backTo="/" title={"Your Deliveries"} />
+    <Header backTo="/" title={"공지 사항"} />
     <Container>
       <div>준비중입니다.</div>
     </Container>

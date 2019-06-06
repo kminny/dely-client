@@ -25,7 +25,7 @@ const AddPhonePresenter: React.SFC<IProps> = ({
   loading
 }) => (
   <Wrapper>
-    <Header backTo="/add-phone" title={"Add your phone"} />
+    <Header backTo="/add-phone" title={"핸드폰 번호 추가"} />
     <Container>
       <Form onSubmit={onSubmit}>
         <Select
@@ -44,14 +44,11 @@ const AddPhonePresenter: React.SFC<IProps> = ({
           name={"phoneNumber"}
           type={"tel"}
           required={true}
-          displayName={"Phone Number"}
+          displayName={"핸드폰 번호"}
           onChange={handleInputChange}
           minLenght={5}
         />
-        <Button
-          disabled={loading}
-          text={loading ? "Sending SMS" : "Add Phone"}
-        />
+        <Button disabled={loading} text={loading ? "문자 전송 중" : "완료"} />
       </Form>
     </Container>
   </Wrapper>

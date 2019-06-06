@@ -104,15 +104,15 @@ const MenuPresenter: React.SFC<IProps> = ({
           </Link>
           <Text>
             <Name>{user.fullName}</Name>
-            <Rating>Money earned: ￦ {user.balance}</Rating>
+            <Rating>가는 길에 획득: ￦ {user.balance}</Rating>
           </Text>
         </Grid>
       )}
     </Header>
-    <SLink to="/trips">Your Deliveries</SLink>
-    <SLink to="/settings">Settings</SLink>
+    <SLink to="/trips">공지 사항</SLink>
+    <SLink to="/settings">설정</SLink>
     <ToggleDriving onClick={toggleDriving as any}>
-      {user && user.isDriving ? "Stop Delying" : "Start Delying"}
+      {user && user.isDriving ? "Dely 멈추기" : "Dely 시작!!"}
     </ToggleDriving>
   </Container>
 );

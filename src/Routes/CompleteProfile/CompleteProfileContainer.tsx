@@ -1,6 +1,7 @@
 import React from "react";
 import { graphql, Mutation, MutationFn, MutationUpdaterFn } from "react-apollo";
 import { toast } from "react-toastify";
+import person from "../../../src/images/person.png";
 import { LOG_USER_IN } from "../../sharedQueries";
 import CompleteProfilePresenter from "./CompleteProfilePresenter";
 import { EMAIL_SIGN_UP } from "./CompleteProfileQueries";
@@ -44,7 +45,7 @@ class CompleteProfileContainer extends React.Component<IProps, IState> {
       lastName: "",
       password: "",
       age: "",
-      profilePhoto: "/home/kmseo/img/person.png",
+      profilePhoto: person,
       major: ""
     };
   }
@@ -118,7 +119,7 @@ class CompleteProfileContainer extends React.Component<IProps, IState> {
 
   private getProfileImage = (url: string): void => {
     this.setState({
-      profilePhoto: "/home/kmseo/img/person.png"
+      profilePhoto: person
     });
   };
 }

@@ -84,11 +84,11 @@ const SocialLogin: React.SFC<IProps> = ({
   handleFacebookResponse
 }) => (
   <Social loginMethod={loginMethod} onClick={onClick}>
-    {loginMethod === "" && (
-      <SocialText>Or connect with Facebook / Email</SocialText>
-    )}
+    {loginMethod === "" && <SocialText>페이스북 또는 이메일 로그인</SocialText>}
     <React.Fragment>
-      {loginMethod === "social" && <SocialTitle>Choose an account</SocialTitle>}
+      {loginMethod === "social" && (
+        <SocialTitle>아래 방법을 선택하세요</SocialTitle>
+      )}
       <FacebookLogin
         appId="321056185249337"
         autoLoad={false}

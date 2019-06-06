@@ -38,7 +38,7 @@ const ChatPresenter: React.SFC<IProps> = ({
     <Helmet>
       <title>Chat | dely</title>
     </Helmet>
-    <Header title={"Chat"} goBack={true} backTo={"/ride"} />
+    <Header title={"채팅"} goBack={true} backTo={"/ride"} />
     <Container>
       <Messages>
         {!loading &&
@@ -60,10 +60,10 @@ const ChatPresenter: React.SFC<IProps> = ({
           name={"message"}
           value={message}
           onChange={handleInputChange}
-          placeholder={"Type your message"}
+          placeholder={"메세지를 입력하세요"}
         />
       </Form>
-      <Button text={"Send message"} width="100%" onClick={handleSubmit} />
+      <Button text={"전송"} width="100%" onClick={handleSubmit} />
     </Container>
   </Wrapper>
 );

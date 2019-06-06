@@ -54,7 +54,7 @@ class AddPhoneContainer extends React.Component<any, IState> {
     const { history } = this.props;
 
     if (addPhone.ok) {
-      toast.success("SMS Sent, redirecting you...");
+      toast.success("확인되었습니다. 문자 전송 중");
       setTimeout(
         () =>
           history.push({
