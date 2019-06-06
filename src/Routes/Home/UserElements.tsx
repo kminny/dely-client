@@ -65,20 +65,23 @@ const UserElements: React.SFC<IUserElementsProps> = ({
   product
 }) => (
   <React.Fragment>
-    <AbsContainer top={true}>
-      <AddressInput
-        value={toAddress}
-        name={"toAddress"}
-        onChange={handleInputChange}
-        onSubmit={submitAddress}
-        placeholder={"요구의 목적지를 입력하세요."}
-        width={"90%"}
-        disabled={status === "choosingFromMap"}
-      />
-      <Btn onClick={toggleMapChoosing}>
-        {status === "choosingFromMap" ? "Stop choosing" : "Choose from map"}
-      </Btn>
-    </AbsContainer>
+    {status !== "foundDirections" && status !== "requesting" && (
+      <AbsContainer top={true}>
+        <AddressInput
+          value={toAddress}
+          name={"toAddress"}
+          onChange={handleInputChange}
+          onSubmit={submitAddress}
+          placeholder={"요구의 목적지를 입력하세요."}
+          width={"90%"}
+          disabled={status === "choosingFromMap"}
+        />
+        <Btn onClick={toggleMapChoosing}>
+          {status === "choosingFromMap" ? "Stop choosing" : "Choose from map"}
+        </Btn>
+      </AbsContainer>
+    )}
+
     {status === "foundDirections" && addedProduct === false && (
       <Container>
         <Input

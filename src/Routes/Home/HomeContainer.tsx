@@ -280,7 +280,7 @@ class HomeContainer extends React.Component<
       maximumAge: 0
     };
     navigator.geolocation.watchPosition(
-      this.updatePosition,
+      this.updatePosition, 
       this.handleGeoError,
       locationOptions
     );

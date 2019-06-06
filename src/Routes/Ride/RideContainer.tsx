@@ -28,6 +28,7 @@ class RideContainer extends React.Component<IProps> {
       props.history.push("/");
     }
   }
+
   render() {
     const {
       location: {
@@ -58,6 +59,7 @@ class RideContainer extends React.Component<IProps> {
       </Query>
     );
   }
+
   private updateQuery = (previousData, { subscriptionData }) => {
     const { history } = this.props;
     if (!subscriptionData.data) {
