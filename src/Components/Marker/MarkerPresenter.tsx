@@ -12,7 +12,7 @@ const Marker = styled.span`
   bottom: 0;
   right: 0;
   z-index: 2;
-  color: #f1c40f;
+  color: #1270a8;
   font-size: 25px;
 `;
 

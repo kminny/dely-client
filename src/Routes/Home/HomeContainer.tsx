@@ -370,7 +370,7 @@ class HomeContainer extends React.Component<
           this.createToMarket
         );
       } else {
-        toast.error("Cant get location");
+        toast.error("위치를 찾을 수 없습니다.");
       }
     }
   };
@@ -417,7 +417,7 @@ class HomeContainer extends React.Component<
         toAddress: address
       });
     } else {
-      toast.error("Cant get location");
+      toast.error("위치를 찾을 수 없습니다.");
     }
   };
 
@@ -740,7 +740,7 @@ export default compose(
   graphql(GET_DRIVERS, {
     name: "GetDriversQuery",
     options: {
-      pollInterval: 10000
+      pollInterval: 5000
     },
     skip: props => {
       if (props.MeQuery && props.MeQuery.me && props.MeQuery.me.user) {
