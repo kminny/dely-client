@@ -2,9 +2,11 @@ import PropTypes from "prop-types";
 import React from "react";
 import { Helmet } from "react-helmet";
 import styled from "styled-components";
+
 import ActionButton from "../../Components/ActionButton";
 import Form from "../../Components/Form";
 import countries from "../../countries";
+
 import BackButton from "./BackButton";
 import Header from "./Header";
 import { loginMethodType } from "./LoginTypes";

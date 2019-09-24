@@ -109,10 +109,12 @@ class CompleteProfileContainer extends React.Component<IProps, IState> {
     { data }: { data: any }
   ) => {
     const { emailSignUp } = data;
+    console.log(emailSignUp);
     const { logUserIn } = this.props;
     if (!emailSignUp.ok && emailSignUp.error) {
       toast.error(emailSignUp.error);
     } else if (emailSignUp.token) {
+      console.log(emailSignUp.token);
       logUserIn({ variables: { token: emailSignUp.token } });
     }
   };
